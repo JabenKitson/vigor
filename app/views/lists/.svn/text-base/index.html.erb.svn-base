@@ -1,0 +1,20 @@
+<h1>Contact Lists</h1>
+
+<table>
+
+<% for alist_cat in @list_cats %>
+  <tr>
+    <td><%=h alist_cat.name %></td>
+	<td><%=h alist_cat.description %></td>
+    <td><%= link_to 'Edit', edit_list_cat_path(alist_cat) %></td>
+    <td><%= link_to 'Remove', alist_cat, :controller => 'list_cats', :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New list', new_list_cat_path %> &nbsp; &nbsp; &nbsp; &nbsp;
+<%= link_to 'Contacts Query Page', friends_path %> &nbsp; &nbsp; &nbsp; &nbsp;
+<%= link_to 'Administer Contact lists', :controller => 'lists'%>
+

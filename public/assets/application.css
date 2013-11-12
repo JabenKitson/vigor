@@ -1,0 +1,171 @@
+/* Colors       * 
+ * Orange Tab f17a23 *
+ * Orange Bgrd eda93a *
+ * Tan Tab - e6e0ce *
+ * Tan Background - F9F7F3 */
+
+
+html,body{margin:0;padding:0;color:#333}
+body{background:#ede8de url(/assets/bg.jpg) repeat-x; font: 76% arial,sans-serif; padding:10px; text-align:center}
+p{margin:0 15px 15px}
+/*p, li {font-size: 12px; line-height:18px;}
+*/
+li{list-style-type:none;}
+a,a:visited,a:active{color: #f17a23}
+a img{border:none}
+h1, h1 a, h2, h2 a, h1 a:visited, h2 a:visited{text-decoration:none; color:#333}
+/*ul {list-style:none;margin-left:0;padding-left:0;margin-top:0;}
+ul li {margin-bottom:8px; margin-left:0;padding-left:0; }*/
+
+h1{
+	font-family: Georgia,Times,serif;
+	font-size: 1.65em;
+	font-weight: normal;
+	color: #7D7D7D; 
+	padding-top: .05em;
+	padding-left: .05em;
+}
+
+h2 {
+	font-family: Georgia,Times,serif;
+	font-size: 1.25em;
+	font-weight: normal;
+	color: #7D7D7D; 
+	padding-top: .05em;
+	padding-left: .05em;
+
+}
+
+/***************************
+ * Container   			   *
+****************************/
+div#container{text-align:left}
+div#container{width:800px;margin:0 auto}
+/***************************
+ * Header    			   *
+****************************/
+div#header{
+	background-color:#fff;
+	width:800px;
+	float: left;
+	font-size: medium; /* could be specified at a higher level */
+	margin: 0;
+	padding: 20px 0 0 0; 
+	}
+.title {width: 650px; padding: 0 0 0 50px}
+.logo {position: absolute; top:20px; padding:4px 0 0 30px}
+/***************************
+ * Navigation			   *
+****************************/
+.photo {width:790px; height:244px; margin:0 5px 3px 5px}
+ div#navigation {
+	background-color:#fff;
+	width:800px;
+	float: left;
+	}
+	
+    #tabs {
+      float:left;
+      width:790px;
+      background-color:#F9F7F3; /* url(/images/navback.jpg) repeat-x;*/
+	  margin:0px 0px 0px 5px;
+	  padding:0;
+      font-size:93%;
+      line-height:normal;
+	  border-bottom:1px solid #F9F7F3;
+      }
+	  
+    #tabs ul {
+	  margin:0;
+	  padding:10px 10px 0 50px;
+	  list-style:none;
+      }
+    #tabs li {
+      display:inline;
+      margin:0;
+      padding:0;
+      }
+    #tabs a {
+      float:left;
+      background:url("/assets/tableft.gif") no-repeat left top;
+      margin:0;
+      padding:0 0 0 4px;
+      text-decoration:none;
+      }
+    #tabs a span {
+      float:left;
+      display:block;
+      background:url("/assets/tabright.gif") no-repeat right top;
+      padding:5px 15px 4px 6px;
+      color:#333;
+      }
+    /* Commented Backslash Hack hides rule from IE5-Mac \*/
+    #tabs a span {float:none;} 
+    /* End IE5-Mac hack */
+    #tabs a:hover span, #tabs a.active span{
+      color:#FFF;
+      }
+    #tabs a:hover, #tabs a.active{
+      background-position:0% -42px;
+      }
+    #tabs a:hover span, #tabs a.active span {
+      background-position:100% -42px;
+      }
+	
+/***************************
+ * Wrapper     			   *
+****************************/
+div#wrapper{ background-color:#FFF; float:left;width:800px; margin:0}
+/**********************************
+ * Content Full Screen (No Extra) *
+***********************************/
+div#content p{line-height:1.4}
+div#content {float:left; width:778px; margin: 0 5px 0px 5px; background-color:F9F7F3; border:solid; border-width:0px; border-color:#e6e0ce; padding:5px}
+/*********************************
+ * Content Part Screen (/w Extra *
+**********************************/
+div#content_part p{line-height:1.4}
+div#content_part {float:left; width:630px; margin: 0 5px 0px 5px; background-color:F9F7F3; border:solid; border-width:0px; border-color:#e6e0ce; padding:5px}
+
+/***************************
+ * Extra     			   *
+****************************/
+div#extra{background:#FFF; }
+div#extra{float:right;width:150px;margin-left:-150px}
+div#extra h3 {
+    background:  #AEC283 ;
+	background: #C0CEA8 ;
+	color: #fff;
+	margin: 5px 5px 5px 0px;
+	padding: 4px 8px 0;
+	height: 20px;
+	width: auto;
+	cursor: pointer;
+	font-size: 0.99em;
+}
+
+div#extra h3 a:link, h3 a:visited {
+	background:  #AEC283 ;
+	background: #C0CEA8 ;
+	
+	color: #fff;
+	text-shadow: 2px 2px 1px #8fc80d;
+	padding: 4px 8px 0;
+	-moz-outline-style: none;
+	display: block;
+	height: 16px;
+	width: auto;
+	text-decoration: none;
+}
+/***************************
+ * Sponsors    			   *
+****************************/
+div#sponsors{ background: #FFF; color: #333}
+div#sponsors p{margin:0;padding:0px 7px 0px 7px}
+div#sponsors{clear:left;width:100%}.nextlink {margin-left:20px;}
+/***************************
+ * Footer    			   *
+****************************/
+div#footer{background: #333;color: #FFF}
+div#footer p{margin:0;padding:5px 10px}
+div#footer{clear:left;width:100%}.nextlink {margin-left:20px;}

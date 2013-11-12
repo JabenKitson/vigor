@@ -1,0 +1,42 @@
+<html style="height:100%">
+<head>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+<script>
+document.getElementById("viewport").setAttribute('content', 'width = ' + screen.width + ', maximum-scale = 1.0, minimum-scale = 1.0');
+</script>
+<title> Vegetarian Information Group of Rochester </title>
+</head>
+
+<body>
+
+ 
+
+<!-- Big Image -->
+<div style="background-color:#ccf;height:100%">
+<div class="row-fluid" style="width=100%;position:relative;height:100%;max-height:100%;min-height:20em;background: url('<%=@header_img_url%>') no-repeat center center;background-size:cover;background-position:center center;" >
+ 
+ <!-- HADER -->  
+   
+   <%= render 'layouts/navigation' %>
+   <%= render 'events'%>
+   
+ <div class="row-fluid" style="position:absolute;bottom:0">
+   <div class="row-fluid hidden-phone" >   
+      <%= link_to image_tag(@header_thumb_url, :style => "width:5em") + ' ' + @picture_title, @parent, :class => "btn-large", :style =>"float:right;margin:4%;background-color:rgba(255,255,255,.5);padding:2px;border:1px solid grey" unless @picture_title.blank? %>
+   </div>	
+   
+   <div class="row-fluid" style="background-color:#e1e2e3;color:#f60;text-shadow: 1px 2px 3px rgba(0,0,0,0.3);">
+      <h1 class="text-center" style="max-width:100%">Eat Plants!</h1>
+   </div>
+ </div>
+ 
+</div>
+</div>
+<!-- Content -->
+<%= yield %>
+
+
+<%=render :partial => '/layouts/footer'%>

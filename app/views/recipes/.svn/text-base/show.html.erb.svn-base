@@ -1,0 +1,29 @@
+<p>
+  <b>Title:</b>
+  <%=h @recipe.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @recipe.description %>
+</p>
+
+<p>
+  <b>Ingredients:</b>
+  <%= @recipe.ingredients %>
+</p>
+
+<p>
+  <b>Instructions:</b>
+  <%= @recipe.instructions %>
+</p>
+
+<% if authorized_to_add_recipes? %>
+<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
+<% end %>
+<% if admin? %>
+<%= link_to 'Delete',  @recipe, :confirm => 'Are you sure?', :method => :delete  %> 
+|
+
+<% end %>
+<%= link_to 'Back', recipes_path %>

@@ -1,0 +1,1 @@
+put ..\vigor_copy\vigor.zip rails_apps/vigor_data/vigor.zip

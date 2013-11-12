@@ -1,0 +1,42 @@
+<h1>Editing donation</h1>
+
+<%= error_messages_for :donation %>
+
+<% form_for(@donation) do |f| %>
+  <p>
+    <b>Contact</b><br />
+    <%= f.text_field :contact_id %>
+  </p>
+
+  <p>
+    <b>Date</b><br />
+    <%= f.date_select :date %>
+  </p>
+
+  <p>
+    <b>New member</b><br />
+    <%= f.check_box :new_member %>
+  </p>
+
+  <p>
+    <b>Renewal</b><br />
+    <%= f.check_box :renewal %>
+  </p>
+
+  <p>
+    <b>Comments</b><br />
+    <%= f.text_area :comments %>
+  </p>
+
+  <p>
+    <b>Earmark</b><br />
+    <%= f.text_field :earmark %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @donation %> |
+<%= link_to 'Back', donations_path %>

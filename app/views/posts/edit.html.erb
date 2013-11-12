@@ -1,0 +1,28 @@
+<div id="content">
+<h1>Editing post</h1>
+
+<%= form_for(@post) do |f| %>
+  <p>
+    <b>Title</b><br />
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <b>Body</b><br />
+    <%= text_area_tag 'post[body]', @post.body, :class => "tinymce", :rows => 40, :cols => 90 %>
+    <%= tinymce %>
+  </p>
+
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @post %>
+<% if can? :delete, Post %>
+    <td>| <%= link_to 'Destroy', @post, :confirm => 'Are you sure?', :method => :delete %></td>
+<% end %>
+ |
+<%= link_to 'Archived Posts', posts_path %>
+</div>

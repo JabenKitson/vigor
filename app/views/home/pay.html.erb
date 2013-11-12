@@ -1,0 +1,21 @@
+<div id="content">
+
+    <body>
+   <% if flash[:warning] %><div class="red flash"><b>Error:</b> <%= flash[:warning] %></div><br/><% end -%>
+   <% if flash[:notice] %><div class="green flash"><b>Success:</b> <%= flash[:notice] %></div><br/><% end -%>
+    	<h1> Secure Payments </h1>
+        <p> Please verify the following information and then continue to PayPal for a secure online credit card payment.</p>
+		<p> Name: <%=@fname%> <%=@lname%></p>
+                <p> Email: <%=@email%></p>
+                <p> Mailing Address: <%=@mail%></p>
+		<p> Type of Payment: <%=@item%></p>
+		<p> Amount: <%=@amount%></p>
+<form name="_xclick" action="https://www.paypal.com/us/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="victorscot@yahoo.com">
+<input type="hidden" name="item_name" value="<%=params[:item]%>">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="amount" value="<%=params[:amount]%>">
+<input type="submit" name="submit" value="Pay with PayPal">
+   
+</form>    

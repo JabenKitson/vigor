@@ -1,0 +1,22 @@
+<h1>Listing review_cats</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+
+<% for review_cat in @review_cats %>
+  <tr>
+    <td><%=h review_cat.name %></td>
+    <td><%=h review_cat.description %></td>
+    <td><%= link_to 'Show', review_cat %></td>
+    <td><%= link_to 'Edit', edit_review_cat_path(review_cat) %></td>
+    <td><%= link_to 'Destroy', review_cat, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New review_cat', new_review_cat_path %>

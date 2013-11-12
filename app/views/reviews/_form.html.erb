@@ -1,0 +1,21 @@
+<% @review = object.reviews.build %>
+
+<%= simple_form_for(object, :html => {:multipart => true} ) do |f|%>
+   <%= f.fields_for :reviews do |builder| %>
+   <% if builder.object.new_record? %>
+    <div class="form-inputs">
+    <p><%= builder.label :title %>
+    <%= builder.text_field :title%></p>
+     <%= builder.input :rating, :collection => ['1','2','3','4','5'], :prompt => 'How many stars?' %></p>
+
+    <p>     <%= builder.input :body, :class => "tinymce", :rows => 12, :cols => 108 %>
+
+    <%= tinymce %></p>
+      
+       </div>
+  <%end%>
+  <%end%>
+   <div class="form-actions">
+    <%= f.submit "Post" %>
+  </div>
+<% end %>

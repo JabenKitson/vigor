@@ -1,0 +1,29 @@
+<html style="height:100%">
+<head>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+<script>
+document.getElementById("viewport").setAttribute('content', 'width = ' + screen.width + ', maximum-scale = 1.0, minimum-scale = 1.0');
+</script>
+<title> Vegetarian Information Group of Rochester </title>
+</head>
+
+<body>
+
+ <div id="fb-root"></div>
+ <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+ <!-- HADER -->  
+   
+   <%= render '/layouts/navigation' %>
+   <%=render :partial => '/layouts/messages'%>
+<!-- Content -->
+<div class="container-fluid" style="padding:2%;min-height:90%">

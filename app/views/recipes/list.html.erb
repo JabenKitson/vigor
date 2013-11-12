@@ -1,0 +1,32 @@
+<div class="row-fluid">
+
+<span class="span9"> 
+<% unless @recipes_list.blank?%>
+<% @recipes_list.each do |recipe| %>
+  <div class="row-fluid"> 
+  	
+  	  <span class="span4">
+    <%= link_to image_tag(recipe.attachments.first.photo.url(:small)), recipe unless recipe.attachments.blank?%>	
+    </span>
+    
+    <span class="span4">
+    	
+    <h3><%= link_to "#{recipe.name}", recipe %></h3>
+    <% unless recipe.created_at.blank? %>
+    <%= h recipe.created_at.strftime("%b %d, %Y") %>	
+    <% end %>
+    </span>
+    
+    <span class="span4">
+    	
+    </span>
+    
+  
+    
+	
+   </div>
+<% end %>
+<% end %>
+</span>
+</div>
+

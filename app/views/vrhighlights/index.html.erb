@@ -1,0 +1,37 @@
+<h1>Listing vrhighligts</h1>
+
+<table>
+  <tr>
+    <th>Price</th>
+    <th>Date observed</th>
+    <th>Name</th>
+    <th>Product url</th>
+    <th>Recipe url</th>
+    <th>User</th>
+    <th>Description</th>
+    <th>Rating</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @vrhighligts.each do |vrhighligt| %>
+  <tr>
+    <td><%= vrhighligt.price %></td>
+    <td><%= vrhighligt.date_observed %></td>
+    <td><%= vrhighligt.name %></td>
+    <td><%= vrhighligt.product_url %></td>
+    <td><%= vrhighligt.recipe_url %></td>
+    <td><%= vrhighligt.user_id %></td>
+    <td><%= vrhighligt.description %></td>
+    <td><%= vrhighligt.rating %></td>
+    <td><%= link_to 'Show', vrhighligt %></td>
+    <td><%= link_to 'Edit', edit_vrhighligt_path(vrhighligt) %></td>
+    <td><%= link_to 'Destroy', vrhighligt, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Vrhighligt', new_vrhighligt_path %>

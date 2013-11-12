@@ -1,0 +1,12 @@
+<% vrattributes = Vrattribute.where(:vrtype => object.vrtype) %>
+<%= simple_form_for(object, :html => {:multipart => true} ) do |f|%>
+   
+<% vrattributes.each do |vrattribute| %>
+	<%=check_box_tag("vrattributes[" + vrattribute.name + "]", value = "1", checked = Vraa.where("vrattribute_id = ? AND vegresource_id = ?",vrattribute.id,object.id).blank??false:true, options = {})%>
+	"<%= vrattribute.name %>"
+	<% end %>
+   <div class="form-actions">
+    <%= f.submit "Update Attributes" %>
+  </div>
+<% end %>
+

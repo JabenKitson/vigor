@@ -1,0 +1,18 @@
+<div class="row-fluid content" >
+	  <span class="span2"><%= link_to(image_tag(vr.attachments.first.photo.url(:small), :style => "width: 100%"), vr) unless vr.attachments.blank? %></span>
+	  <span class="span4"><% vr.rating.times do%><%=image_tag('/assets/star.jpg',:style => "width:2.5em")%> <%end%>(<%=vr.reviews.size%> reviews)<h4><%= link_to vr.name,vr %></h4><%= vr.info %></span>
+	  <span class="span4">
+	  <% vr.vrhighlights.order("created_at DESC").limit(3).each do |highlight| %>
+       <div class="container-fluid btn btn-large" style="width:80%;margin-right:2em;font-size:.8em">
+       	<%= image_tag(highlight.attachments.first.photo.url(:thumb),:style => "height:3em") unless highlight.attachments.blank? %> <%= highlight.name %>
+        $<%= highlight.price%> on <%=highlight.date_observed%>
+       </div>
+     <% end %>	
+	  </span>
+	  <span class="span2">
+	  <%if can? :create, Vegresource%>
+	    <%= link_to 'Edit', edit_vegresource_path(vr), :class => "btn" %>
+	    <%= link_to '<i class="icon-white icon-trash"></i>'.html_safe, vr, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger" %>
+      <%end%>
+	  </span>
+  </div>

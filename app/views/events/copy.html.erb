@@ -1,0 +1,91 @@
+<div id="content">
+<h1>New events</h1>
+
+<% if can? :create, Event %>
+<%= simple_form_for(@event) do |f| %>
+
+  <p><b>Category</b>
+  	<select name="event[ecat]" tabindex="2"  >
+    	                <option value = "5" <%if @copy[:ecat] == 5 then %>selected="true"<%end%>>Potlucks</option>
+                        <option value = "4" <%if @copy[:ecat] == 4 then %>selected="true"<%end%>>Special events</option>
+                        <option value = "1" <%if @copy[:ecat] == 1 then %>selected="true"<%end%>>Education</option>
+                        <option value = "2" <%if @copy[:ecat] == 2 then %>selected="true"<%end%>>Meeting</option>
+                        <option value = "3" <%if @copy[:ecat] == 3 then %>selected="true"<%end%>>Outreach</option>
+                        <option value = "6" <%if @copy[:ecat] == 6 then %>selected="true"<%end%>>Other</option>
+	</select> 
+  </p>
+
+<p>
+    <b>Title</b><br />
+    <%= f.text_field :etitle, :value => @copy[:etitle] %>
+  </p>
+
+  <p>
+    <b>What</b><br />
+    <%= f.text_area :einfo, :size => "90x6", :value => @copy[:einfo] %>
+  </p>
+
+  <p>
+   
+ <%= f.input :edate, label: "When" ,:as => :date, :start_year => Date.today.year,
+                              :end_year => Date.today.year + 1,
+                              :order => [:month, :day, :year], :default => @copy[:edate]%>  
+ <%= f.input :etimestart, :label  =>"Start Time", as => :time, :ampm => true, :default => @copy[:etimestart], :minute_step  => 15%>
+  <%= f.input :etimeend, :label  =>"End Time", as => :time, :ampm => true,:default => @copy[:etimeend], :minute_step  => 15 %>     
+
+  
+ </p>
+
+  <p>
+    <b>Location</b><br />
+    <%= f.text_field :elocation, :size=> "80", :value => @copy[:elocation]%>
+  </p>
+
+  <p>
+    <b>Contactname</b><br />
+    <%= f.text_field :econtactname, :size=> "80", :value => @copy[:econtactname] %>
+  </p>
+
+  <p>
+    <b>Contact Phone</b><br />
+    <%= f.text_field :econtactphone, :value => @copy[:econtactphone] %>
+  </p>
+
+  <p>
+    <b>Contact Email</b><br />
+    <%= f.text_field :econtactemail, :size=> "80", :value => @copy[:econtactemail] %>
+  </p>
+
+  <p>
+    <b>Directions</b><br />
+    <%= f.text_area :edirections, :size => "90x6", :value => @copy[:edirections] %>
+  </p>
+
+  <p>
+    <b>Map URL</b><br />
+    <%= f.text_field :emaps, :size=> "120", :value => @copy[:emaps] %>
+  </p>
+
+  <p>
+    <b>Cost</b><br />
+    <%= f.text_field :ecost, :value => @copy[:ecost] %>
+  </p>
+
+  <p>
+    <b>More Information URL</b><br />
+    <%= f.text_field :elinkmoreinfo, :size=> "120", :value => @copy[:elinkmoreinfo] %>
+  </p>
+
+
+  <p>
+    <b>Make Active</b><br />
+    <%= f.check_box :active, :checked =>"checked" %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+<% end %>
+<%= link_to 'Back', events_path %>
+</div>

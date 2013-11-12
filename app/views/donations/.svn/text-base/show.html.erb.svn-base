@@ -1,0 +1,33 @@
+<p>
+  <b>Contact:</b>
+  <%=h @donation.contact_id %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%=h @donation.date %>
+</p>
+
+<p>
+  <b>New member:</b>
+  <%=h @donation.new_member %>
+</p>
+
+<p>
+  <b>Renewal:</b>
+  <%=h @donation.renewal %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%=h @donation.comments %>
+</p>
+
+<p>
+  <b>Earmark:</b>
+  <%=h @donation.earmark %>
+</p>
+
+
+<%= link_to 'Edit', edit_donation_path(@donation) %> |
+<%= link_to 'Back', donations_path %>

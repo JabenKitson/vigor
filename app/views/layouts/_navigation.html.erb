@@ -1,26 +1,78 @@
-<%= link_to "Vigor", root_path, :class => 'brand' %>
-<ul class="nav">
-  <% if user_signed_in? %>
-    <li>
-    <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
-    </li>
-  <% else %>
-    <li>
-    <%= link_to 'Login', new_user_session_path %>
-    </li>
-  <% end %>
-  <% if user_signed_in? %>
-    <li>
-    <%= link_to 'Edit account', edit_user_registration_path %>
-    </li>
-    <% if current_user.has_role? :admin %>
-      <li>
-      <%= link_to 'Admin', users_path %>
-      </li>
-    <% end %>
-  <% else %>
-    <li>
-    <%= link_to 'Sign up', new_user_registration_path %>
-    </li>
-  <% end %>
+<% is_active = Hash.new()
+  if current_page?(:controller => "/home", :action => "index")  
+   then is_active["home"] = "active" end
+  if current_page?(:controller => "/home", :action => "contact") 
+   then is_active["contact"] = "active" end
+  if current_page?(:controller => "/events", :action => "index") ||
+     current_page?(:controller => "/events", :action => "calendar")
+   then is_active["events"] = "/active" end
+  if current_page?(:controller => "/recipes")   
+   then is_active["recipes"] = "active" end
+     if current_page?(:controller => "/vegresources")   
+   then is_active["resources"] = "active" end
+  if current_page?(:controller => "/posts")  
+   then is_active["blog"] = "active" end %>
+   
+<div class="row-fluid">
+
+<div class="navbar" style="width:100%">
+<div class="navbar-inner" style="background-image: none;background-color:white;border:none">
+	<div class="row-fluid" >
+		<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+		 <a class="btn btn-navbar" data-toggle="collapse" data-target="#mainnav" class="icon-list" style="position:absolute;top:.5em; right:.5em">
+		 <span class="icon-list" ></span>
+		 </a>
+		 
+	<!-- Be sure to leave the brand out there if you want it shown -->
+    <a class="brand" style="margin-bottom:-.2em" href="<%=root_url%>"><%=image_tag "/assets/VIGOR.png", :style => "width:12em;max-width:80%;z-index:10"%> </a>
+  
+  <!-- Everything you want hidden at 940px or less, place within here -->
+  <div id="mainnav" class="nav-collapse collapse" style="z-index:2;background-color:white">
+  	<!-- .nav, .navbar-search, .navbar-form, etc -->
+ <ul class="nav" style="margin-top:2em">
+<li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources    
+	<b class="caret"></b>   </a>
+	<ul class="dropdown-menu">
+<li><%= link_to 'Grocery Guide', grocery_path, :tabindex => -1 %> </li>
+<li><%= link_to 'Restaurant Guide', ristorantes_path %></li>
+<li><%= link_to 'Books',    books_path %></li>
+<li><%= link_to 'Videos',     videos_path %></li>
+<li><%= link_to 'Websites',   websites_path %> </li>
+<li><%= link_to 'Rochester Area Community Supported Agriculture',  csas_path %> </li>
 </ul>
+</li>
+<li><%=link_to("<span>Events</span>".html_safe,events_path,:class => is_active["events"])%></li>
+<li><%=link_to("<span>Blog</span>".html_safe,posts_path,:class => is_active["blog"])%></li>
+<li><%=link_to("<span>Recipes</span>".html_safe,recipes_path,:class => is_active["recipes"])%></li>
+<li><%=link_to("<span>Contact</span>".html_safe,"/contact",:class => is_active["contact"])%></li>
+  <% if user_signed_in? %>
+  <li> <%= link_to 'Logout', logout_path, :method => :delete %></li>
+   <% if can? :manage, :all%>
+   <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin    
+	<b class="caret"></b>   </a>
+	<ul class="dropdown-menu">
+<li><%= link_to 'Users', users_path, :tabindex => -1 %> </li>
+<li><%= link_to 'E-mail Lists', friends_path, :tabindex => -1 %></li>
+</ul>
+</li>
+<%end%>
+  <% else %>
+   <li> <%= link_to 'Login', login_path %></li>
+  <% end %>
+
+</ul> 
+   <div class="pull-right" style="padding-top:1em;z-index:1">
+ <% if signed_in? && current_user.photo.exists? then %>
+<p><%= link_to(image_tag(current_user.photo.url(:thumb), :style => "height:3em;z-index:1") + ' ' + current_user.name, user_path(current_user))%> </p>
+<% elsif signed_in? %>
+<p><%= link_to(image_tag('/assets/profile_missing.jpg',:class => 'img-polaroid'), user_path(current_user))  %></p>
+<% end %></div>
+   </div>
+
+   </div>
+   </div>
+   </div>
+</div>
+
+
+

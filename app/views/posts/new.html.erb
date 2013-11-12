@@ -1,0 +1,22 @@
+<div id="content">
+<h1>New blog post</h1>
+
+<%= form_for(current_user.posts.create) do |f| %>
+  <p>
+    <b>Title</b><br />
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <b>Body</b><br />
+    <%= text_area_tag 'post[body]',@post.body, :class => "tinymce", :rows => 40, :cols => 90 %>
+    <%= tinymce %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', posts_path %>
+</div>

@@ -1,0 +1,33 @@
+<div id="content">
+<h1>Editing post</h1>
+
+<%= error_messages_for :post %>
+
+<% form_for(@post) do |f| %>
+  <p>
+    <b>Title</b><br />
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <b>Body</b><br />
+    <%= f.text_area :body, :size => "90x40" %>
+  </p>
+
+  <p>
+    <b>Created at</b><br />
+    <%= f.datetime_select :created_at %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @post %>
+<% if admin? %>
+    <td>| <%= link_to 'Destroy', @post, :confirm => 'Are you sure?', :method => :delete %></td>
+<% end %>
+ |
+<%= link_to 'Archived Posts', posts_path %>
+</div>

@@ -1,0 +1,13 @@
+<p>
+  <b>Name:</b>
+  <%=h @review_cat.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @review_cat.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_review_cat_path(@review_cat) %> |
+<%= link_to 'Back', review_cats_path %>

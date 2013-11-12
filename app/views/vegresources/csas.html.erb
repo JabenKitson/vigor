@@ -1,0 +1,13 @@
+<h1 class="title" style="margin: 0 -.4em;padding: .1em .4em">Community Supported Agrigulture</h2>
+
+
+<% @csas.each do |vr| %>
+
+<%=render :partial => '/vegresources/listitem', :locals => {:vr => vr}%>
+<% end %>
+
+
+<br />
+<% if can? :create, Vegresource %>
+<%= link_to 'New CSA', new_vegresource_path(:vrtype => 'csa'),:class => "btn btn-primary" %>
+<%end%>

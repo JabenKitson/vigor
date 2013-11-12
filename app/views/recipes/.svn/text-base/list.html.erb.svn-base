@@ -1,0 +1,31 @@
+<div id="content">
+
+<%
+rcat = "1 = 0"
+if params[:all] then rcat = "1 = 1" end
+if params[:rcat] then params[:rcat].each_value {|category| rcat += " or category_id = #{category}" } end
+@recipes_list = Recipe.find_by_sql ["SELECT * FROM recipes WHERE (#{rcat}) and created_at >= ? and created_at <= ?",Time.parse(params[:from]),Time.parse(params[:to])+24*60*60]%>
+
+<table>
+  <tr>
+    <th>Recipe</th>
+    <th>Category</th>
+    <th>Date</th>
+  </tr>
+
+<% for recipe in @recipes_list %>
+  <tr>
+    <td><%= link_to "#{recipe.title}", recipe %>
+	</td>
+    <td>
+    	<%= recipe.category.name %>
+    </td>
+    <td>
+    	<%= h recipe.created_at.strftime("%b %d, %Y") %>
+		
+    </td>
+  </tr>
+<% end %>
+</table>
+</div>
+

@@ -1,0 +1,59 @@
+<p style="float:right">
+	<script type="text/javascript">
+  $('[data-behaviour~=datepicker]').datepicker()
+</script>
+
+<% if can? :create, Recipe %>
+<%= link_to 'New recipe', new_recipe_path %>
+<% end %>
+</p>
+<h2> New Recipes </h2>
+<%@recipes_list = Recipe.find_by_sql ["SELECT * FROM recipes WHERE created_at >= ? and created_at <= ?",Time.now()-4*7*24*60*60,Time.now()]%>
+
+<table>
+
+<% for recipe in @recipes_list %>
+  <tr>
+    <td><%= link_to "#{recipe.title}", recipe %>
+	</td>
+    <td>
+    	(<%= recipe.category.name if recipe.category%>)
+    </td>
+    <td>
+    	<%= h recipe.created_at.strftime("%b %d, %Y") %>
+		
+    </td>
+  </tr>
+  </table>
+<% end %>
+<!--<h2> Featured </h2>-->
+<h2> List by Category and Date Posted </h2>
+        
+ <%= simple_form_for :recipe ,:url => '/recipes/list' do |f| %>
+  <%= f.input :from, as: :date, start_year: Date.today.year - 20,
+                              end_year: Date.today.year , discard_day: true,
+                              order: [:month, :year] %>
+  <%= f.input :to, as: :date, start_year: Date.today.year - 20,
+                              end_year: Date.today.year , discard_day: true,
+                              order: [:month, :year] %>                                                           
+                       
+	
+	<%= f.button :submit, 'Search'%>  
+
+	<br>Categories:
+    <div width = 70px>
+    
+    
+  <%@list_categories = Category.find_by_sql ["select * from categories"]%>
+  <input type="checkbox" name = "all" checked>All Categories</input>
+  <% for category in @list_categories do%>
+  <br><input type="checkbox"  name = "rcat[<%=category["id"]%>]" value="<%=category["id"]%>" ><%=category["name"]%></input>
+<% end %>
+    
+		</div>
+	
+  <% end %>
+
+
+<br />
+

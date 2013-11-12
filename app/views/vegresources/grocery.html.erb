@@ -1,0 +1,11 @@
+<h1 class="title" style="margin: 0 -.4em;padding: .1em .4em">Grocery Stores</h1>
+
+<% @grocers.each do |vr| %>
+<%=render :partial => '/vegresources/listitem', :locals => {:vr => vr}%>
+  
+<% end %>
+
+<br />
+<% if can? :create, Vegresource%>
+<%= link_to 'Add Grocer', new_vegresource_path(:vrtype => 'grocer'),:class => "btn btn-primary" %>
+<%end%>

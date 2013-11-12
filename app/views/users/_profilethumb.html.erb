@@ -1,0 +1,18 @@
+<div class="btn">
+<p>Added by</p><%=user.name%>
+<% if user.photo.exists? then %>
+<p><%= link_to(image_tag(user.photo.url(:thumb), :class => 'img-polaroid'), user_path(user))%></p>
+<% else %>
+<p><%= link_to(image_tag('/assets/profile_missing.jpg',:class => 'img-polaroid'), user_path(user))  %></p>
+<% end %>
+<% if current_user == user and !user.photo.exists? %>
+<p> Please upload a profile picture. </p>
+<%= simple_form_for(user,:html => { :multipart => true }) do |f| %>
+  <p>
+  <%= f.label 'Photo' %><br />
+  <%= f.file_field :photo %>
+  <%= f.submit 'Upload Photo'%>
+</p>
+<% end %>
+<% end %>
+</div>

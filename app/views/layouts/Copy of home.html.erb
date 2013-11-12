@@ -1,0 +1,44 @@
+<html>
+<head>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+<title> Vegetarian Information Group of Rochester </title>
+</head>
+
+<body>
+
+<div id="header" >	
+	 <img style="width:3.2em;height:3.2em;position:absolute;top:0;left:1em" src="/assets/vigor_logo.gif" alt="Eat Plants"/> 
+     <img style="height:3em;width:70%;max-width:45em;position:absolute;top:0;left:5em"src="/assets/vigorTitleText.gif" alt="Vegetarian Information Group of Rochester" style="width:9%:;display:inline"/>
+
+    <%= render :partial => '/home/events' %>
+    <div style="position:absolute;top:5em;left:1.5em">
+      <%= render 'layouts/homenavigation' %>
+      <%= link_to @parent.class, @parent, :class=>'btn'%>
+ </div>
+    </div>
+</div>
+
+<div id="container" class="row-fluid" style="margin-top:3.5em;">	
+ 
+
+
+ <div id="bigimage" class="row-fluid" >
+ <div class="row-fluid" style="z-index:-2 !important"> <%=image_tag @header_img_url, :style => "z-index:-2;width:100%;min-height:20em;min-width:480px"%></div> 
+ <div class="row-fluid" style="z-index:2 !important;margin-top:-2em;background-color:white" >Eat Plants in Rochester, MN</div>
+
+ <div class="row-fluid"> <%= render 'layouts/messages' %> </div>
+ </div>
+ 
+ <div id="wrapper" class="container-fluid" >
+ <%= yield %>
+</div>
+
+</div>
+<div id="footer" class="row-fluid" style="clear:both"><p>Vegetarian Information Group of Rochester, 501(c)3</p></div>
+
+
+</body>
+
+</html>

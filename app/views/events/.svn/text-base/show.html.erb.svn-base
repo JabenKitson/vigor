@@ -1,0 +1,36 @@
+<div id="content">
+<%event_text = "<div><h1> #{@event.etitle}</h1>"%>
+<%event_text += "<p><b>What:</b> #{@event.einfo}"%>
+<%event_text += "<p><b>Where:</b> #{@event.elocation}"%>
+<%event_text += "<p><b>When:</b> #{ @event.etimestart.strftime("%I:%M%p")} #{@event.etimeend.strftime("- %I:%M%p")} #{@event.edate.strftime("%A, %b %d, %Y")}"%>
+<%event_text += "<p><b>Cost:</b> #{@event.ecost}"%>
+<%event_text += "<p><b>Contact:</b> #{@event.econtactname} - #{@event.econtactphone} - <a href=\"mailto:#{@event.econtactemail}\">#{@event.econtactemail}</a>"%>
+<%event_text += "<p><b>Directions:</b> #{@event.edirections}"%>
+  <%if @event.emaps%>
+<%event_text += "<a href=\"#{@event.emaps}\">Map</a>"%>
+  <%end%>
+<%event_text += "<p><b>More Info:</b>  <a href=\"#{@event.elinkmoreinfo}\">#{@event.elinkmoreinfo}</a></div>"%>
+
+<%=event_text%>
+	<% if contacts_admin? %><div>
+	
+   <!-- Email this event to list -->
+    <% form_tag '/home/send_email2list' do -%>
+	<%= hidden_field_tag 'doc_url', "http://www.vigr.org/events/#{@event.id}"%>
+	<%= hidden_field_tag 'subject', @event.etitle%>
+	<%= hidden_field_tag 'message', event_text%>
+	Send this post to the following list:
+   <%= select("list", "list_cat_id", ListCat.find(:all).collect{ |c| [ c.name, c.id] }) %>
+   <%= submit_tag "Send", :confirm => 'Are you sure you want to email this to the selected list?' %>
+   <%end%> 
+    </div><%end%>
+	
+<% if can? :create, Event %>
+<%= link_to 'Copy', :controller => 'events', :action => 'copy', :id => @event.id %> |
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<% end %>
+<%= link_to 'Back', events_path %>
+<% if admin? %>
+| <%= link_to 'Delete', @event, :confirm => 'Are you sure?', :method => :delete %>
+<% end %>
+</div>

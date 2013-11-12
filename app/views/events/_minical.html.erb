@@ -1,0 +1,21 @@
+<% @calendardate = calendardate unless calendardate.blank?
+@calendardate ||= Time.now() %>
+<div class="btn btn-mini" style="margin-right:2em">
+	<%= (calendar(:year => @calendardate.year, :month => @calendardate.month,
+:previous_month_text => form_tag(list_events_path, :method => "post") + hidden_field_tag(:month, "prev") + hidden_field_tag(:calendarmonth, @calendardate.month.to_s()) + hidden_field_tag('calendaryear', @calendardate.year.to_s()) + submit_tag(value = "<") + "</form>".html_safe,
+:next_month_text => form_tag(list_events_path, :method => "post") + hidden_field_tag(:month, "next") + hidden_field_tag(:calendarmonth, @calendardate.month.to_s()) + hidden_field_tag('calendaryear', @calendardate.year.to_s()) + submit_tag(value = ">") + "</form>".html_safe,
+ :abbrev => (0..0)) do |d| 
+       thisdaysEvents = Event.all(:conditions => ["edate > :start_date AND edate < :end_date", { :start_date => DateTime.civil(d.year,d.month,d.day)-1.minute, :end_date => DateTime.civil(d.year,d.month,d.day)+1.day}])  
+       if thisdaysEvents.size >= 1 # Is there at least one event on this day?  
+         #[thisdaysEvents[0]["etitle"], {:class => "specialDay"}]     
+         [link_to(d.mday,{:controller => "events", :action => "show", :id => thisdaysEvents[0]["id"]}), {:class => "specialDay", :onMouseOver => "popLayer('#{thisdaysEvents[0]["etitle"]}')", :onMouseOut => "hideLayer()"}]      # "specialDay", and gives the rest of the days another CSS class
+       else                                      # "normalDay". You can also use this highlight today differently
+         [d.mday, {:class => "normalDay"}]       # from the rest of the days, etc.
+       end
+     end).html_safe
+ %>
+ </div>
+ 
+ <% if can? :create, Event %>
+<%= link_to 'Submit Event', new_event_path, :class => "btn btn-success", :style=>"margin:.5em 0 0 16px;"%>
+<%end%>

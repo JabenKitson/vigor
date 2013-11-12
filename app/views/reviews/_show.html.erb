@@ -1,0 +1,18 @@
+<%if review.user%>
+<%=render :partial => '/users/profilethumb', :locals => {:user => review.user}%>
+<%end%>
+<p>
+  <b><%=review.title%></b>
+  <%= review.body %>
+</p>
+
+<p>
+  <% review.rating.to_i.times do %>
+  <%=image_tag '/assets/star.jpg', :style => "width:1em"%>
+  <%end%>
+</p>
+
+<%= render :partial => '/attachments/view', :locals => {:object => review} %>
+<%= render :partial => '/attachments/form', :locals => {:object => review} %>
+<%= link_to 'Edit', edit_review_path(review) %> |
+<%= link_to 'Back', reviews_path %>

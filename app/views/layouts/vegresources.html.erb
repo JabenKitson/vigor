@@ -1,0 +1,24 @@
+<%= stylesheet_link_tag '/assets/calendar/tan/small' %>
+<%= render :partial => '/layouts/header'  %>
+
+<div class="row-fluid">
+	<span class="span2" style="background-color:#EDE8DE">	
+ <ul class="nav nav-pills nav-stacked" style="margin-top:.5em;">
+<li><%= link_to 'Grocery Guide', grocery_path, :tabindex => -1 %> </li>
+<li><%= link_to 'Restaurant Guide', ristorantes_path %></li>
+<li><%= link_to 'Books',    books_path %></li>
+<li><%= link_to 'Videos',     videos_path %></li>
+<li><%= link_to 'Websites',   websites_path %> </li>
+<li><%= link_to 'CSAs',  csas_path %> </li>
+</ul>
+	</span>
+	
+	<span class="span10" > 
+    <%=yield%>
+    </span>
+
+
+</div>
+
+
+<%= render :partial => '/layouts/footer'  %>

@@ -1,0 +1,45 @@
+<%@recipe = recipe%>
+<h2 class="title"><%=h @recipe.name %></h2>
+<%=render :partial => '/layouts/like', :locals => {:likeurl => recipe_url(@recipe)}%>	
+
+<%=image_tag @recipe.attachments.first.photo unless @recipe.attachments.blank?%>
+<p>
+<% @recipe.rating.times do%><%=image_tag('/assets/star.jpg',:style => "width:2.5em")%> <%end%>(<%=@recipe.reviews.size%> reviews)
+</p>
+<% if can? :create, Vegresource %>
+<p><%= link_to 'Write Review', review_recipe_path(@recipe), :class => "btn btn-primary"  %></p>
+<% elsif !user_signed_in? %>
+<%= render :partial => '/users/signup', :locals => {:message => "to get access to review recipes."}%>
+<%end%>
+
+  
+<div class="content">
+  <%= @recipe.description.html_safe%>
+</div>
+
+<div class="content">
+  <%= @recipe.ingredients.html_safe %>
+</div>
+
+<div class="content">
+  <%= @recipe.instructions.html_safe %>
+</div>
+
+  <%= render :partial => '/attachments/view', :locals => {:object => @recipe} %>
+
+<%if @recipe.user%>
+<%=render :partial => '/users/profilethumb', :locals => {:user => @recipe.user}%>
+<%end%>
+
+<% if can? :create, Recipe %>
+<%= render :partial => '/attachments/form', :locals => {:object => @recipe} %>
+<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
+<% elsif !user_signed_in? %>
+<%= render :partial => '/users/signup', :locals => {:message => "to get access to post recipes!"}%>
+<%end%>
+<% if can? :manage, Recipe %>
+<%= link_to 'Delete',  @recipe, :confirm => 'Are you sure?', :method => :delete  %> 
+|
+
+<% end %>
+<%= link_to 'Back', recipes_path %>

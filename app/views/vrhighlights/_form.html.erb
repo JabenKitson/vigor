@@ -1,0 +1,18 @@
+<%= simple_form_for(@vrhighlight) do |f| %>
+<p>
+  <div class="form-inputs">
+    <%= f.label :price %>
+    <%= text_field_tag 'vrhighlight[price]' %>
+    <%= f.input :date_observed %>
+    <%= f.input :name %>
+    <%= f.input :product_url if @vegresource.vrtype == 'grocer'%>
+    <%= f.input :recipe_url if @vegresource.vrtype == 'grocer'%>
+    <%= f.hidden_field :user_id, :value => current_user.id%>
+    <%= f.input :description %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Submit Highlight'%>
+  </div>
+</p>
+<% end %>

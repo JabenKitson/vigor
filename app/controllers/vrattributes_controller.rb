@@ -1,0 +1,2 @@
+class VrattributesController < ApplicationController
+end

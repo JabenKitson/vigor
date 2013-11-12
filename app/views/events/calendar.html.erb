@@ -1,0 +1,30 @@
+<%= stylesheet_link_tag '/assets/calendar/tan/big' %>
+<div id="content">
+<% if can? :create, Event %>
+<%= link_to 'Add Event', new_event_path %>
+<%end%>
+<h2> List </h2>
+  <% form_tag '/events/list' do -%>
+    <div>
+    <select name="ecat" tabindex="2"  >
+    	                <option value = "0" selected="selected">All Categories</option>
+                        <option value = "5" >Potlucks</option>
+                        <option value = "4" >Special events</option>
+                        <option value = "1" >Education</option>
+                        <option value = "2" >Meeting</option>
+                        <option value = "3" >Outreach</option>
+                        <option value = "6" >Other</option>
+	</select> 
+    From: <%= date_select("event", "etimestart", :default => 3.days.from_now)%>
+	To: <%= date_select("event", "etimeend", :default => 3.days.from_now)%>	  
+    <%= submit_tag 'Search' %>
+	</div>
+  <% end -%>
+  
+<%= render :partial => "calendar", :action => "calendar" %>
+ 
+<div id="object1" style="position:absolute;background-color:FFFFDD;color:black;border-color:black;border-width:20; visibility:show;left:25px; top:-100px; z-index:+1" onmouseover="overdiv=1;"  onmouseout="overdiv=0; setTimeout('hideLayer()',1000)">
+pop up description layer
+</div>
+</div>
+

@@ -1,0 +1,25 @@
+<div id="content">
+	<p style="float:right;">
+	<% if authorized_to_add_posts? %>
+    <%= link_to 'New post', new_post_path %>
+    <% end %>
+</p>
+<h1>Blog Archive</h1>
+
+<table>
+<% for post in @posts %>
+  <tr>
+    <td><%=h post.created_at.strftime("%b %d, %Y") %>&nbsp</td>
+    <td><b><%=h post.title %></b>&nbsp &nbsp</td>
+    <td><%= link_to 'Show', post %></td>
+	<% if authorized_to_add_posts? %>
+   <td>| <%= link_to 'Edit', edit_post_path(post) %></td>
+   	<% end %>
+	<% if admin? %>
+    <td>| <%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></td>
+<% end %>
+   </tr>
+<% end %>
+</table>
+
+</div>

@@ -1,0 +1,15 @@
+<h1>Editing recipe</h1>
+<% if can? :create, Recipe %>
+
+<%= simple_form_for(@recipe) do |f| %>
+  <%= render :partial => "form", :locals => { :f => f, :button => "Update"  }  %>
+<% end %>
+<% else %>
+  <p><strong>You are currently not logged in.</strong></p>
+  <p>
+    <%= link_to 'Login', login_path %> or
+    <%= link_to 'Sign Up', signup_path %>
+  </p>
+<% end %>
+<%= link_to 'Show', @recipe %> |
+<%= link_to 'Back', recipes_path %>

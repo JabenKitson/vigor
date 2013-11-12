@@ -1,0 +1,10 @@
+<h2 class="title"><%= link_to @post.title, :action => 'show', :id => @post %></h2>
+<%=render :partial => '/layouts/like', :locals => {:likeurl => post_url(@post)}%>	
+
+<p><%if @post.user%>
+<div class="row-fluid">
+<span class="span1"><%=render :partial => '/users/profilethumb', :locals => {:user => @post.user}%></span>
+<span class="span4"><small>Posted by <%=@post.user.name%> on <%= @post.created_at.strftime('%B %e, %Y')%></small></span>
+</div>
+<%end%>
+<%= @post.body.html_safe %></p>

@@ -1,0 +1,161 @@
+<% if contacts_admin? %>
+<h1>Contacts</h1>
+
+<% friends_csv_headers = [] %>
+<% friends_csv_array = [] %>
+
+<%= link_to 'New Contact', new_friend_path %>
+<br>
+Display fields: 
+<%if params["name"] == "on" %>
+<% friends_csv_headers << "First Name" << "Last Name" %>
+&nbsp;name 
+<%end%>
+<%if params["e-mail"] == "on" %>
+<% friends_csv_headers << "e-mail" %>
+&nbsp; e-mail
+<%end%>
+<%if params["phone"] == "on" %>
+<% friends_csv_headers << "Home Phone" << "Work Phone" << "Cell Phone" << "Fax" %>
+&nbsp; phone
+<%end%>
+<%if params["address"] == "on" %>
+<% friends_csv_headers << "Street Address" << "City" << "State" << "Zip" %>
+&nbsp; address
+<%end%>
+<%if params["uid"] == "on" %>
+<% friends_csv_headers << "User ID" %>
+&nbsp; uid
+<%end%>
+<%if params["subscribed"] == "on" %>
+<% friends_csv_headers << "Susbscribed Lists"%>
+<br> subscribed lists
+<%end%>
+
+<% for category in @list_categories do%>
+ <%if params["#{category["id"]}"]%>
+ <br>Select users subscribed to list => <%=category["name"]%>
+ <%end%>
+<% end %>
+
+<%if params["fil_fname"] != ""%>
+<br> filter for first name = <%=params["fil_fname"]%>
+<%end%>
+<%if params["fil_lname"] != ""%>
+<br> filter for last name = <%=params["fil_lname"]%>
+<%end%>
+<%if params["fil_city"] != ""%>
+<br> filter for city = <%=params["fil_city"]%>
+<%end%>
+<%if params["fil_state"] != ""%>
+<br> filter for state = <%=params["fil_state"]%>
+<%end%>
+<%if params["fil_email"] != ""%>
+<br> filter for email = <%=params["fil_email"]%>
+<%end%>
+
+<% for @friend in @friends %>
+<% friends_csv_record = [] %>
+<table>
+  <tr>
+  	<td>
+  		<%if params["name"]%>
+		<% friends_csv_record << @friend.fname%>
+		<% friends_csv_record << @friend.lname%>
+   	 	  <b><%=h @friend.fname %>&nbsp;<%=h @friend.lname %></b>
+		<%end%>
+      	  <%= link_to 'Edit', edit_friend_path(@friend) %>&nbsp;
+      	  <%= link_to 'Delete', @friend, :confirm => 'Are you sure?', :method => :delete %>
+		
+		<%if params["e-mail"]%>
+		<% friends_csv_record << @friend.email%>
+		  <br><%=h @friend.email %>
+		<%end%>
+		
+		<%if params["phone"]%>
+		<% friends_csv_record << @friend.hphone%>
+		<% friends_csv_record << @friend.wphone%>
+		<% friends_csv_record << @friend.cphone%>
+		<% friends_csv_record << @friend.fax%>
+		  <br>home:<%=h @friend.hphone %>
+		  <br>work:<%=h @friend.wphone %>
+		  <br>cell:<%=h @friend.cphone %>
+    	  <br>fax:<%=h @friend.fax %>
+		<%end%>	
+	 </td>
+	 
+     <td>
+    	<%if params["address"]%>
+    	Mailing Address:
+		<% friends_csv_record << @friend.street%>
+		<% friends_csv_record << @friend.city%>
+		<% friends_csv_record << @friend.state%>
+		<% friends_csv_record << @friend.zip%>
+    	<br><%=h @friend.street %>
+    	<br><%=h @friend.city %>,&nbsp;<%=h @friend.state %>&nbsp;<%=h @friend.country %>&nbsp;&nbsp;<%=h @friend.zip %>
+		<%end%>
+	 </td>
+	 
+     <td>
+    	<%if params["uid"]%>
+    	  User ID:
+		  <% login = User.find(:all, :conditions => "id = #{@friend.user_id}") %>
+		  <% if login[0] == nil %>
+           <% friends_csv_record << "none" %>
+   		   <br>Not set.
+		  <%end %>
+		  <% if login[0] != nil %>
+		   <% friends_csv_record << login[0].login%>
+   		   <br><%=h login[0].login %>
+		  <%end %>
+		<%end%>
+	 </td>
+	 
+	</tr>
+	<tr>
+	
+	 <td>
+		<%if params["subscribed"]%>
+		<% sublists = List.find(:all, :conditions => "friend_id = #{@friend.id}") %>
+		<%if sublists%><%=@friend.fname%> is subscribed to the following lists: <%end%>
+		<%csv_sublists = ""%>
+		  <% for sublist in sublists do
+		    asublist = ListCat.find(:all, :conditions => "id = #{sublist.list_cat_id}")	
+			csv_sublists += "#{asublist[0].name};"%>
+			<br><%=asublist[0].name%> 
+		  <%end%>
+		  <% friends_csv_record << csv_sublists %>
+		<%end%>
+	 </td>
+	</tr>
+	
+	<tr>
+     <td>
+  
+	 </td>
+  </tr>
+  
+</table>
+<% friends_csv_array << friends_csv_record %>
+<% end %>
+
+
+<br />Export the above list to CSV.  
+<% form_tag '/friends/dump_csv' do -%>
+<% friends_csv_headers.each do |i| %>
+<%=hidden_field_tag 'friends_csv_headers[]', i %>
+<% end %>
+<%=hidden_field_tag 'friends_csv_numrec', friends_csv_array.size %>
+<% friends_csv_array.each_index do |a| 
+ friends_csv_array[a].each do |b|  %>
+<%=hidden_field_tag "friends_csv_array#{a}[]", b %>
+<% end %>
+<% end %>
+
+<%= submit_tag 'Download' %> 
+<%end%>
+<%= link_to 'Contacts Query Page', friends_path %> &nbsp; &nbsp; &nbsp; &nbsp;
+<%= link_to 'Administer Contact lists', :controller => 'lists'%>
+<%end%>
+
+

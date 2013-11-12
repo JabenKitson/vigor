@@ -1,0 +1,30 @@
+<h1>Listing reviews</h1>
+
+<table>
+  <tr>
+    <th>Review cat</th>
+    <th>Title</th>
+    <th>Review</th>
+    <th>Review date</th>
+    <th>Who</th>
+    <th>Author contact</th>
+  </tr>
+
+<% for review in @reviews %>
+  <tr>
+    <td><%=h review.review_cat_id %></td>
+    <td><%=h review.title %></td>
+    <td><%=h review.review %></td>
+    <td><%=h review.review_date %></td>
+    <td><%=h review.who %></td>
+    <td><%=h review.author_contact_id %></td>
+    <td><%= link_to 'Show', review %></td>
+    <td><%= link_to 'Edit', edit_review_path(review) %></td>
+    <td><%= link_to 'Destroy', review, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New review', new_review_path %>

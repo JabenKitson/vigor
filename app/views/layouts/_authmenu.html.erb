@@ -1,0 +1,12 @@
+  <% if user_signed_in? %>
+  <%= current_user.name %>
+  <%= render :partial => '/users/profilethumb', :locals => { :user => current_user } %>
+ <% if can? :manage, :all%>
+<%= link_to 'Manage Users', users_path%></br>
+<%= link_to 'Manage Contacts', :controller => 'friends'%><br>
+<%= link_to 'Manage emails lists', :controller => 'lists'%>
+<%end%>
+<% else %>
+  <%= link_to 'Login', login_path %> | 
+  <%= link_to 'Sign Up', signup_path %>
+<% end %> </p>

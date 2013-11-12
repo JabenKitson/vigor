@@ -1,0 +1,11 @@
+
+   <% for attachment in object.attachments %>
+   <div id="attachment<%=attachment.id.to_s%>" style="display: inline-block">
+   <p><%= link_to image_tag(attachment.photo.url(:small)), attachment.photo.url %></p>
+   <p><%= attachment.caption %></p>
+   <% if can? :create, Attachment %>
+   <p><%= link_to 'Remove', attachment, :confirm => 'Are you sure?', :method => :delete, "data-icon" => "delete", "data-replace" => '#attachment' + attachment.id.to_s%></p>
+   <%= render :partial => '/attachments/eligibilityform', :locals => {:attachment => attachment }%>
+   <% end %>
+   </div>
+   <% end %>

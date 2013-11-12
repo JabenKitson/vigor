@@ -1,0 +1,4 @@
+<h2>Write a Review</h2>
+<%= render :partial => '/reviews/form', :locals => {:object => @object_to_review} %>
+
+<%= link_to 'Back', reviews_path(@object_to_review) %>

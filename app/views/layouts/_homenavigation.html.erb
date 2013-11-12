@@ -1,0 +1,36 @@
+<% is_active = Hash.new()
+  if current_page?(:controller => "/home", :action => "index")  
+   then is_active["home"] = "active" end
+  if current_page?(:controller => "/home", :action => "contact") 
+   then is_active["contact"] = "active" end
+  if current_page?(:controller => "/events", :action => "index") ||
+     current_page?(:controller => "/events", :action => "calendar")
+   then is_active["events"] = "/active" end
+  if current_page?(:controller => "/recipes")   
+   then is_active["recipes"] = "active" end
+     if current_page?(:controller => "/vegresources")   
+   then is_active["resources"] = "active" end
+  if current_page?(:controller => "/posts")  
+   then is_active["blog"] = "active" end %>
+<div class="span8" style="margin-top:4%;margin-left:4%">
+<ul class="nav nav-tabs nav-stacked pull-left text-right" style="background-color:rgba(255,255,210,.8);width:30%;min-width:128px;max-width:100%">
+
+<li><%=link_to("<span>Blog</span>".html_safe,posts_path,:class => is_active["blog"])%></li>
+<li><%=link_to("<span>Resources</span>".html_safe,vegresources_path,:class => is_active["resources"])%></li> 
+<li><%=link_to("<span>Events</span>".html_safe,events_path,:class => is_active["events"])%></li>
+<li><%=link_to("<span>Recipes</span>".html_safe,recipes_path,:class => is_active["recipes"])%></li>
+<li><%=link_to("<span>Contact</span>".html_safe,"/contact",:class => is_active["contact"])%></li>
+	    <% if user_signed_in? %>
+ 
+  <%= link_to 'Logout', logout_path, :method => :delete %>
+<% else %>
+  <%= link_to 'Login', login_path %> | 
+  <%= link_to 'Sign Up', signup_path %>
+<% end %> 
+
+</ul> 
+
+</div>
+<div class="span4 offset2">
+
+</div>

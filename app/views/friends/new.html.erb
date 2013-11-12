@@ -1,0 +1,72 @@
+<h1>New Contact</h1>
+
+<%= form_for(@friend) do |f| %>
+  <p>
+  	<table>
+    <tr style="font-size:12px;">
+	<td><b>First Name</b></td>
+	<td> <b>Last Name</b></td>
+	</tr>
+	<tr>
+    <td><%= f.text_field :fname %> </td>  
+    <td><%= f.text_field :lname %></td>
+	</tr>
+	</table>
+  </p>
+
+  <p>
+    <b>Email</b><br/>
+    <%= f.text_field :email %>
+  </p>
+
+  <p>
+    <b>Phone Numbers</b><br />
+	<table>
+    <tr style="font-size:12px;">
+	<td > <b>Home</b> </td> <td> <b>Work</b> </td> <td><b>Cell</b></td> <td><b>Fax</b></td>
+	</tr>
+	<tr>
+	<td><%= f.text_field :hphone, :size=>12 %></td>
+	<td><%= f.text_field :wphone, :size=>12  %></td>
+    <td><%= f.text_field :cphone, :size=>12  %></td>   
+    <td><%= f.text_field :fax, :size=>12  %></td>  
+	</tr>
+	</table>
+  </p>
+
+  <p>  <b>Address</b><br />
+
+    <b>Street</b><br />
+    <%= f.text_field :street, :size=>70 %>
+  </p>
+
+  <p>
+  	  
+  <table>
+  	<tr style="font-size:12px;">
+  	<td><b>City</b></td>	<td><b>State</b></td>    <td><b>Zip</b></td>
+  	</tr>
+	<tr>
+	<td><%= f.text_field :city %></td> <td><%= f.text_field :state,:size=>2 %></td> <td><%= f.text_field :zip,:size=>8 %></td>
+	</tr>
+  </table>
+
+  <p><b>User ID</b><br/>
+<%
+   options_string = "<option selected=\"selected\">none</option>" 
+   logins = User.find(:all) 
+   for login in logins
+    if login != nil then options_string += "<option>#{login.email}</option>" end
+   end
+%>
+<%= select_tag "user_id", options_string %>
+</p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+
+<%= link_to 'Contacts Query Form', friends_path %> &nbsp; &nbsp; &nbsp; &nbsp;
+<%= link_to 'Administer Contact lists', :controller => 'lists'%>

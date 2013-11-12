@@ -1,0 +1,52 @@
+8
+
+dir
+8
+svn+ssh://jabenkit@jabenkitson.com/home/jabenkit/svn/vigr/public/stylesheets/calendar/tan
+svn+ssh://jabenkit@jabenkitson.com/home/jabenkit/svn/vigr
+
+
+
+2008-12-23T15:01:46.531753Z
+1
+jabenkit
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a22d958e-fe99-47c6-acec-b73cca48d107
+
+small.css
+file
+
+
+
+
+2009-01-29T02:27:06.000000Z
+879401941753ce52ebc4bc329ee9261d
+2008-12-23T15:01:46.531753Z
+1
+jabenkit
+
+big.css
+file
+
+
+
+
+2009-01-29T02:27:06.000000Z
+1eda8750b77bfd4173a2a18c00393f3c
+2008-12-23T15:01:46.531753Z
+1
+jabenkit
+

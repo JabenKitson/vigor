@@ -1,0 +1,123 @@
+<div id="content">
+<h1>New events</h1>
+
+<%= error_messages_for :events %>
+
+<% if can? :create, Event %>
+<% form_for(@event) do |f| %>
+
+  <p><b>Category</b>
+  	    <select name="event[ecat]" tabindex="2"  >
+    	                <option value = "5" >Potlucks</option>
+                        <option value = "4" >Special events</option>
+                        <option value = "1" >Education</option>
+                        <option value = "2" >Meeting</option>
+                        <option value = "3" >Outreach</option>
+                        <option value = "6" >Other</option>
+	</select> 
+  </p>
+
+<p>
+    <b>Title</b><br />
+    <%= f.text_field :etitle %>
+  </p>
+
+  <p>
+    <b>What</b><br />
+    <%= f.text_area :einfo, :size => "90x6" %>
+  </p>
+
+  <p>
+    <b>When</b><br />
+	<%= calendar_date_select_tag "event[edate]", (Time.now()+10*24*60*60).strftime("%b %d, %Y")%>
+
+    <b>From </b>
+  
+<input type="hidden" id="event_etimestart_1i" name="event[etimestart(1i)]" value="2000"></input>
+<input type="hidden" id="event_etimestart_2i" name="event[etimestart(2i)]" value="1"></input>
+<input type="hidden" id="event_etimestart_3i" name="event[etimestart(3i)]" value="1"></input>
+<select id="event_etimestart_4i" name="event[etimestart(4i)]">
+ <option value="00" selected="selected">00 </option>
+ <%(1..23).each do |i|%>
+ <option value="<%=i%>"><%=i%></option>
+ <%end%>
+</select>
+ : <select id="event_etimestart_5i" name="event[etimestart(5i)]">
+<option value="00" selected="selected">00</option>
+ <%(1..59).each do |i|%>
+ <option value="<%=i%>"><%=i%></option>
+ <%end%>
+</select>
+
+     &nbsp 
+    <b>To </b>
+<input type="hidden" id="event_etimeend_1i" name="event[etimeend(1i)]" value="2000"></input>
+<input type="hidden" id="event_etimeend_2i" name="event[etimeend(2i)]" value="1"></input>
+<input type="hidden" id="event_etimeend_3i" name="event[etimeend(3i)]" value="1"></input>
+<select id="event_etimeend_4i" name="event[etimeend(4i)]">
+ <option value="00" selected="selected">00 </option>
+ <%(1..23).each do |i|%>
+ <option value="<%=i%>"><%=i%></option>
+ <%end%>
+</select>
+ : <select id="event_etimeend_5i" name="event[etimeend(5i)]">
+<option value="00" selected="selected">00</option>
+ <%(1..59).each do |i|%>
+ <option value="<%=i%>"><%=i%></option>
+ <%end%>
+</select>
+ </p>
+
+  <p>
+    <b>Location</b><br />
+    <%= f.text_field :elocation, :size=> "80" %>
+  </p>
+
+  <p>
+    <b>Contactname</b><br />
+    <%= f.text_field :econtactname, :size=> "80" %>
+  </p>
+
+  <p>
+    <b>Contact Phone</b><br />
+    <%= f.text_field :econtactphone %>
+  </p>
+
+  <p>
+    <b>Contact Email</b><br />
+    <%= f.text_field :econtactemail, :size=> "80" %>
+  </p>
+
+  <p>
+    <b>Directions</b><br />
+    <%= f.text_area :edirections, :size => "90x6" %>
+  </p>
+
+  <p>
+    <b>Map URL</b><br />
+    <%= f.text_field :emaps, :size=> "120" %>
+  </p>
+
+  <p>
+    <b>Cost</b><br />
+    <%= f.text_field :ecost %>
+  </p>
+
+  <p>
+    <b>More Information URL</b><br />
+    <%= f.text_field :elinkmoreinfo, :size=> "120" %>
+  </p>
+
+
+  <p>
+    <b>Make Active</b><br />
+    <%= f.check_box :active, :checked =>"checked" %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+<% end %>
+<%= link_to 'Back', events_path %>
+</div>

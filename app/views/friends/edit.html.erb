@@ -1,0 +1,90 @@
+<h1>Editing Contact</h1>
+
+<%= form_for(@friend) do |f| %>
+ <p>
+  	<table>
+    <tr style="font-size:12px;">
+	<td><b>First Name</b></td>
+	<td> <b>Last Name</b></td>
+	</tr>
+	<tr>
+    <td><%= f.text_field :fname %> </td>  
+    <td><%= f.text_field :lname %></td>
+	</tr>
+	</table>
+  </p>
+
+  <p>
+    <b>Email</b><br/>
+    <%= f.text_field :email %>
+  </p>
+
+  <p>
+    <b>Phone Numbers</b><br />
+	<table>
+    <tr style="font-size:12px;">
+	<td > <b>Home</b> </td> <td> <b>Work</b> </td> <td><b>Cell</b></td> <td><b>Fax</b></td>
+	</tr>
+	<tr>
+	<td><%= f.text_field :hphone, :size=>12 %></td>
+	<td><%= f.text_field :wphone, :size=>12  %></td>
+    <td><%= f.text_field :cphone, :size=>12  %></td>   
+    <td><%= f.text_field :fax, :size=>12  %></td>  
+	</tr>
+	</table>
+  </p>
+
+  <p>  <b>Address</b><br />
+
+    <b>Street</b><br />
+    <%= f.text_field :street, :size=>70 %>
+  </p>
+
+  <p>
+  	  
+  <table>
+  	<tr style="font-size:12px;">
+  	<td><b>City</b></td>	<td><b>State</b></td>    <td><b>Zip</b></td>
+  	</tr>
+	<tr>
+	<td><%= f.text_field :city %></td> <td><%= f.text_field :state,:size=>2 %></td> <td><%= f.text_field :zip,:size=>8 %></td>
+	</tr>
+  </table>
+
+  <p>
+    <b>VIGOR User ID</b><br />
+
+<%
+   options_string = "<option>none</option>" 
+   logins = User.find(:all) 
+   for login in logins 
+   options_string += "<option"
+   if login.id == @friend.user_id then options_string += " selected" end
+   options_string +=">#{login.login}</option>" 
+   end
+%>
+
+<%= select_tag "user_id", options_string %>
+</p>
+  </p>
+  
+   
+  <p><b>Add or remove <%=@friend.fname%> from the following lists:</b>
+  <% alllistcats = ListCat.find(:all)
+  for alistcat in alllistcats do%>
+   <br><input type="checkbox"  name = "<%=alistcat["id"]%>" 
+   <%if List.find(:all,:conditions => "friend_id = #{@friend.id} and list_cat_id = #{alistcat["id"]}" ).size >=1%>
+   checked
+   <%end%>
+   ><%=alistcat["name"]%></input>
+   <!-- - Expires on <input type="text_field"  name = "<%=alistcat["id"]%>expires" 
+   value = "<%=alistcat["expires"]%>"</input>-->
+ <% end %>
+ 
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Contacts Query Page', friends_path %> &nbsp; &nbsp; &nbsp; &nbsp;
+<%= link_to 'Administer Contact lists', :controller => 'lists'%>

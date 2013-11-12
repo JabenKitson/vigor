@@ -1,0 +1,61 @@
+
+<%
+@ingredients = ['CHOCOLATE','BEANS','TOFU','MUSHROOMS','PASTA','RICE','LENTILS','POTATOES','CASHEWS','SEITAN','PUMPKIN','TEMPEH','GINGER','POTATO','CHICKPEAS','AVOCADO','COCONUT MILK','BASIL','WALNUTS','ALMONDS','CILANTRO','PINENUTS','APPLES','CHOCOLATE CHIPS','QUINOA']
+@categories = Category.find_by_sql ["select * from categories"]
+#@potlucks = ['January 2013','February 2013','March 2013']
+#@ratings = ['*','**','***','****','*****']
+@authors = User.joins(:recipes).select("DISTINCT users.name")%>
+<div class="nav nav-tabs nav-stacked" style="width:100%">
+	<div class="row-fluid" >
+		<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+		
+			<!-- Be sure to leave the brand out there if you want it shown -->
+  
+  <!-- Everything you want hidden at 940px or less, place within here -->
+  <div>
+  	<!-- .nav, .navbar-search, .navbar-form, etc -->
+ <ul class="btn-group btn-group-vertical nav" style="margin-top:.5em;">
+ 	
+ 	<!-- Ingredients -->
+<li class="btn dropdown"> <a href="#" class="active dropdown-toggle" data-toggle="dropdown">Ingredients    
+	<b class="caret"></b>   </a>
+	<ul class="dropdown-menu">
+    <% @ingredients.each do |item|%>
+    <li><%= link_to item, '/listrecipes/ingredient/' + item, :tabindex => -1 %> </li>
+    <%end%>
+</ul>
+</li>
+
+ 	<!-- Categories -->
+<li class="btn dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories   
+	<b class="caret"></b>   </a>
+	<ul class="dropdown-menu">
+    <% @categories.each do |category|%>
+    <li><%= link_to category.name, '/listrecipes/category/' + category.id.to_s, :tabindex => -1 %> </li>
+    <%end%>
+</ul>
+</li>
+
+ 	<!-- Potlucks -->
+
+
+ 	<!-- Ratings -->
+
+
+ 	<!-- Authors -->
+<li class="btn dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Authors    
+	<b class="caret"></b>   </a>
+	<ul class="dropdown-menu">
+    <% @authors.each do |item|%>
+    <li><%= link_to item.name,  '/listrecipes/author/' + item.name, :tabindex => -1 %> </li>
+    <%end%>
+</ul>
+</li>
+
+
+</ul> 
+   </div>
+ 
+   </div>
+   </div>
+   

@@ -1,0 +1,104 @@
+/*
+  A grey based theme, inspired by Blinksale and their ColorBurn widget. http://firewheeldesign.com
+  
+  AUTHOR: Geoffrey Grosenbach http://nubyonrails.com
+  
+  Colors: 
+    dk: 787888
+    lt: 4f4f5b
+    lter: a8a8a8
+    white: ffffff
+*/
+
+/* TODO */
+
+.calendar {
+  font-size: 13px;
+  color:gray;
+  border:#e6e0ce 2px solid;
+  display:block;
+  width:140px;
+  margin: 0 0 0 3px;
+  z-index: 1000;
+  background-color: #F9F7F3;
+}
+
+thead tr {
+  color: black;
+}
+
+.monthName th {
+  font-weight: normal;
+  text-align: right;
+  padding-top: 4px;
+  padding-bottom: 3px;
+  color: black;
+}
+
+.dayName th {
+  width: 20px;
+  font-size: 13px;
+  padding-top: 2px;
+  padding-bottom: 1px;
+  background-color: #696a68;
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+.otherMonth, .day, .specialDay {
+  padding: 2px !important;
+  border-right: 1px solid #111111 !important;
+  border-left: 1px solid #111111 !important;
+  border-color: #e6e0ce !important;
+}
+
+.otherMonth {
+  color: #999999;
+  background-color: #d7d6d1 !important;;
+}
+
+.day, .specialDay {
+  padding: 2px !important;
+  border-bottom: 1px solid #111111 !important;;
+  border-top: 1px solid #111111 !important;
+  border-color: #e6e0ce !important;
+  background-color: #e6e0ce;
+}
+
+.weekendDay {
+  background-color: #e6e0ce;
+}
+
+
+.specialDay a, .specialDay a:visited, .specialDay a:hover {
+  color: white;
+  text-decoration: none;
+  
+}
+.specialDay a:hover {
+  color: black;
+  background-color: white;
+  border-bottom: 1px solid;
+  border-top: 1px solid;
+  border-color: #f17a23;
+ 
+}
+
+.today {
+	background-color: white;
+	border: 1px dashed !important;
+	border-color: black !important;
+	color: black;
+}
+
+.specialDay {
+  background-color: #f17a23;
+  color: black;
+}
+
+Colors: 
+  dk: 787888
+  lt: 4f4f5b
+  lter: a8a8a8
+  white: ffffff
+

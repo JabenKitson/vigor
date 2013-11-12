@@ -1,0 +1,94 @@
+<!-- ############### -->
+<!-- Resource Fields -->
+<!-- ############### -->
+<div class="row-fluid">
+<span class="span6">
+<h2 class="title"><%= @vegresource.name %></h2>  
+<%=render :partial => '/layouts/like', :locals => {:likeurl => vegresource_url(@vegresource)}%>
+
+ <p><%= @vegresource.website %></p>
+ <p><%= @vegresource.author %></p>
+ <p><%= @vegresource.address %></p>
+ <p><%= @vegresource.info %></p>
+ 
+ <% if ['restaurant','grocer'].include?(@vegresource.vrtype)%>
+ </span>
+
+<!-- ############### -->
+<!--<h2> Images </h2> -->
+<!-- ############### -->
+<span class="span6">
+	
+<%= render :partial => '/attachments/view', :locals => {:object => @vegresource} %>
+<% if can? :create, Vegresource %>
+<%= render :partial => '/attachments/form', :locals => {:object => @vegresource} %>
+<%end%>
+
+ <% if ['restaurant','grocer'].include?(@vegresource.vrtype)%>
+</span>
+</div>
+
+<!-- ###############    -->
+<!-- <h2> Details </h2> -->
+<!-- ###############    -->
+
+<% if can? :create, Vegresource  %>	
+<%= render :partial => 'vraform', :locals => {:vegresource => @vegresource} %>
+<% end %>
+  <div class="row-fluid content">
+   <% @vegresource.vrattributes.each do |vrattribute| %>
+     <span class="span2"><%= vrattribute.name %> </span>
+      <% end %>
+  </div>
+<% end %>
+
+<!-- ############### -->
+<!-- Menu Links -->
+<!-- ############### -->
+<div>
+<% if can? :create, Vegresource  %>	
+<%= link_to 'Edit entry for ' + @vegresource.name, edit_vegresource_path(@vegresource), :class => "btn" %> 
+<%= link_to 'Create New Attribute Type for ' + @vegresource.vrtype, new_vrattribute_path, :class => "btn"  %> 
+<% end %>
+</div>
+
+
+<div class="row-fluid">
+<span class="span5">
+<!-- ############### -->
+<h2>Highlights</h2>  
+<!-- ############### -->
+<% if can? :create, Vegresource %>
+<p><%= link_to 'Highlight Item', highlight_vegresource_path(@vegresource), :class => "btn btn-primary" %></p>
+<% elsif !user_signed_in? %>
+<%= render :partial => '/users/signup', :locals => {:message => "to get access to highlight " + @vegresource.vrtype + " items."}%>
+<%end%>
+<% @vegresource.vrhighlights.each do |highlight| %>
+<div class="container-fluid content" style="margin-right:2em">
+<%= render :partial => '/vrhighlights/show', :locals => {:vrhighlight => highlight} %>
+</div>
+<% end %>
+<% end %>
+</span>
+<span class="span1"></span>
+<span class="span5">
+<!-- ############### -->
+<h2>Reviews</h2>
+<!-- ############### -->
+
+<% if can? :create, Vegresource %>
+<p><%= link_to 'Write Review', review_vegresource_path(@vegresource), :class => "btn btn-primary"  %></p>
+<% elsif !user_signed_in? %>
+<%= render :partial => '/users/signup', :locals => {:message => "to get access to review " + @vegresource.vrtype + "s."}%>
+<%end%>
+<% @vegresource.reviews.each do |review| %>
+<div class="container-fluid content" style="margin-left:0">
+<%= render :partial => '/reviews/show', :locals => {:review => review} %>
+</div>
+<% end %>
+</span>
+</div>
+
+
+
+

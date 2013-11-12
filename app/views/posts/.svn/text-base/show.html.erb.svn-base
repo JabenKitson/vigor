@@ -1,0 +1,33 @@
+<div id="content">
+<p><%= render :partial => "post", :object => @post %>
+<% if authorized_to_add_posts? %>
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<% end %>
+<%= link_to 'Back', posts_path %>
+    <% if contacts_admin? %><div>
+   <!-- Email this post to list -->
+    <% form_tag '/home/send_email2list' do -%>
+	<%= hidden_field_tag 'doc_url', "http://www.vigr.org/posts/#{@post.id}"%>
+	<%= hidden_field_tag 'subject', @post.title%>
+	<% blog_post = "<H1>#{@post.title}</H1><div>#{@post.body}</div>"%>
+	<%= hidden_field_tag 'message', blog_post%>
+	Send this post to the following list:
+   <%= select("list", "list_cat_id", ListCat.find(:all).collect{ |c| [ c.name, c.id] }) %>
+   <%= submit_tag "Send", :confirm => 'Are you sure you want to email this to the selected list?' %>
+   <%end%> 
+    </div><%end%>
+<h2>Comments</h2>
+   <% for comment in @post.comments %>
+      <%= comment.body %>
+      <hr />
+<% end %>
+
+<%= form_tag :action => "comment", :id => @post %>
+   <%= text_area "comment", "body", :size => "70x12" %><br />
+   <%= get_captcha() %> 
+   <%= submit_tag "Comment" %>
+</form>
+</p>
+
+
+</div>

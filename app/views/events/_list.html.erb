@@ -1,0 +1,36 @@
+<% unless upcoming.blank? %>
+<% upcoming.each do |event|%>
+<% unless event.active == false || event.etimestart.blank? || event.etimeend.blank? || event.edate.blank? then%>
+<div style="border-bottom:1px dotted grey;margin-bottom:.1em">
+<div class="btn-group">
+  <button class="btn btn-warning"><%= event.etimestart.strftime("%I:%M%p") %></button>
+  <button class="btn btn-info"><%=event.edate.strftime("%A, %b %d, %Y")%></button>
+</div>
+ <div class="media">
+  <a class="pull-left" href="<%= event_url(event) %>">
+  	<%unless event.attachments.empty?%>
+   <img class="media-object" src="<%= event.attachments.first.photo.url(:small) %>">
+    <%end%>
+  </a>
+  <div class="media-body">
+    <h4 class="media-heading"> <%= link_to "#{event.etitle}", event %></h4>
+     <%= event.einfo%>
+  </div>
+</div>
+<p><%= event.elocation%></p>
+<p><%= event.etimestart.strftime("%I:%M%p") %> <%= event.etimeend.strftime("- %I:%M%p") %></p>  
+</div> 
+<% end %>
+<% end %>
+
+<% else %>
+<%= render :partial => '/events/show', :locals => {:event => Event.order('edate DESC').first}%>
+<% end %>
+
+
+
+
+ 
+
+
+

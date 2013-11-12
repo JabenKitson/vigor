@@ -1,0 +1,23 @@
+   <html>
+   <body>
+   <h3>  **CONTRIBUTE FORM -- AUTOMATED EMAIL***</h3>
+    
+   <p>
+   You have recieved a message from <%= @mail_info["from_name"] %> about <%=@mail_info["subject"] %>
+   </p>
+    
+   <p> <%= @mail_info["from_name"]%> indicated her/she planned to pay <%=@mail_info["amount"]%> via PayPal.
+   </p>
+   <br/>
+
+<p> The mailing address form was filled in as: <%= @mail_info["mail"]%>. 
+   </p>
+   Comments:
+   <br/>
+   <p>
+   <%= @mail_info["message"] %>
+   <p>
+   <br/>
+   Please consider it and reply to <a href="mailto:<%= @mail_info["from_email"] %>"><%= @mail_info["from_email"] %></a><br/>
+   </body>
+   </html>

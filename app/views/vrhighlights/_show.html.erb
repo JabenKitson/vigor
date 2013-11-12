@@ -1,0 +1,29 @@
+
+<div class="btn btn-large">
+<p> 
+  <h2><%= vrhighlight.name %></h2>
+</p>
+
+<p>
+  <b>Price:</b>
+  $<%= vrhighlight.price %> on <%= vrhighlight.date_observed %>
+</p>
+<p>
+  <%= vrhighlight.description %>
+</p>
+</div>
+<p><%= vrhighlight.product_url %></p>
+
+<p> <%= vrhighlight.recipe_url %></p>
+
+
+<%= render :partial => '/attachments/view', :locals => {:object => vrhighlight} %>
+<%= render :partial => '/attachments/form', :locals => {:object => vrhighlight} %>
+<div class="btn"><%if vrhighlight.user%>
+<p>Added by</p><%=vrhighlight.user.name%>
+<%=render :partial => '/users/profilethumb', :locals => {:user => vrhighlight.user}%>
+<%end%></div>
+<% if can? :manage, Vegresource %>
+<%= link_to 'Edit', edit_vrhighlight_path(vrhighlight), :class => "btn	"%> 
+<%= link_to 'Destroy', vrhighlight, :confirm => 'Are you sure?', :method => :delete %>
+<%end%>

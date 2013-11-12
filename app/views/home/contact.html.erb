@@ -1,0 +1,55 @@
+<div class="container-fluid" id="content">
+	<h1 class="title">Contact</h1>
+   <span class="span8">
+   <div class="row-id" style="margin:1em">
+   <p><b>Vegetarian Information Group of Rochester</b><br>
+      PO Box 253<br>
+      Rochester, MN 55903-0253</p>
+   <p><%= mail_to 'contact@vigr.org', 'contact@vigr.org' %></p>
+   <form class="content form-horizontal" action="/home/my_mailer" method="post" id="contact_form"> 
+   <fieldset>
+
+   <div class="control-group">
+    <label class="control-label" for="comment_name">Name</label>
+    <div class="controls">
+      <input type="text" id="comment_name" name="comment[name]" placeholder="Name">
+    </div>
+  </div>
+   
+   <!-- You might want to make subject a drop down select box -->
+
+     <div class="control-group">
+    <label class="control-label" for="comment_subject">Subject</label>
+    <div class="controls">
+      <input type="text" id="comment_subject" name="comment[subject]" placeholder="Subject">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="comment_email">Email</label>
+    <div class="controls">
+      <input type="text" id="comment_email" name="commet[email]" placeholder="Email">
+    </div>
+  </div> 
+  
+    <div class="control-group">
+    <label class="control-label" for="comment_message">Message</label>
+    <div class="controls">
+    	<textarea rows="5" id="comment_message" name="comment[message]"></textarea>
+      
+    </div>
+  </div>
+  
+  <br/><br/>
+  <!-- Before you submit, check if the values are there -->
+  <div class="row-fluid">
+  <span class="span10"><%= recaptcha_tags unless user_signed_in?%> </span>
+  <span class="span2"><button type="submit" class="btn btn-primary">Send</button></span
+  </div>
+  </fieldset>
+  </form>
+  </div>
+  </span>
+  <span class="span1"><%= render 'layouts/social' %></span>
+  <span class="span3"></span>
+</div>

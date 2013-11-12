@@ -1,3 +1,19 @@
-<h3>User</h3>
-<p>User: <%= @user.name %></p>
-<p>Email: <%= @user.email if @user.email %></p>
+<h2><%= @user.name %></h2>
+<%= @user.email if current_user == @user %>
+<% if @user.photo.exists? %>
+<p><%= image_tag(@user.photo.url(:medium), :class => 'img-polaroid') %></p>
+<% if current_user == @user %>
+<%= link_to 'Remove Profile Photo	', removephoto_user_path(@user), :confirm => "Remove Profile Photo?"%>
+<% end %>
+<% elsif current_user == @user%>
+<p> Please upload a profile picture. </p>
+<%= simple_form_for(@user,:html => { :multipart => true}) do |f| %>
+  <p>
+  <%= f.label 'Photo' %><br />
+  <%= f.file_field :photo %>
+  <%= f.submit 'Upload Photo'%>
+</p>
+<% end %>
+<% end %>
+<%= image_tag('/assets/profile_missing_large.jpg', :class => 'img-polaroid') unless @user.photo.exists? %>
+

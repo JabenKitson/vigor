@@ -1,0 +1,33 @@
+<p>
+  <b>Review cat:</b>
+  <%=h @review.review_cat_id %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%=h @review.title %>
+</p>
+
+<p>
+  <b>Review:</b>
+  <%=h @review.review %>
+</p>
+
+<p>
+  <b>Review date:</b>
+  <%=h @review.review_date %>
+</p>
+
+<p>
+  <b>Who:</b>
+  <%=h @review.who %>
+</p>
+
+<p>
+  <b>Author contact:</b>
+  <%=h @review.author_contact_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_review_path(@review) %> |
+<%= link_to 'Back', reviews_path %>

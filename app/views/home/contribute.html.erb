@@ -1,0 +1,24 @@
+<div id="content">
+   <% if flash[:notice] %><div class="green flash"><b>Success:</b> <%= flash[:notice] %></div><br/><% end -%>
+   <% if flash[:warning] %><div class="red flash"><b>Error:</b> <%= flash[:warning] %></div><br/><% end -%>
+    	<h1> Membership</h1>
+		<p> Vigor is a 501(c)3 organization.  Membership fees and donations are used to promote vegetarianism.</p>
+		<p><h2>New Membership, Renewal or Donation</h2> (Secure Credit Card Payment) </p>
+
+<form name="donate" action="/home/pay" method="post">
+<p>First Name <input type="text" name="fname" ></p>
+<p>Last Name <input type="text" name="lname" ></p>
+<p>Email Address <input type="text" name="email"></p>
+<p>Mailing Address (For new memberships) <input type="text" name="mail"></p>
+<p>Type of Payment <select name="item" tabindex="2"  >
+    	                <option value = "New Membership" >New Membership</option>
+    	                <option value = "Membership Renewel" >Membership Renewel</option>
+    	                <option value = "Donation" >Donation</option>
+</select></p>
+<p>Amount <input type="text" name="amount" value="25.00"></p>
+<p>Comments </p><p><%=text_area("comments","text", "cols" => 70, "rows" => 8)%></p>
+ <%= recaptcha_tags %>
+<p><input type="submit" name="submit" value="continue"> An email will be sent with the above information to the VIGOR board members.</p> 
+</form>    
+<p></p>
+</div>

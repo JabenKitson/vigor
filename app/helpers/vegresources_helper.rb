@@ -1,0 +1,2 @@
+module VegresourcesHelper
+end

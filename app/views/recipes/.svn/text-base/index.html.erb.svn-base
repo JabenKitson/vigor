@@ -1,0 +1,49 @@
+<p style="float:right">
+<% if authorized_to_add_recipes? %>
+<%= link_to 'New recipe', new_recipe_path %>
+<% end %>
+</p>
+<h2> New Recipes </h2>
+<%@recipes_list = Recipe.find_by_sql ["SELECT * FROM recipes WHERE created_at >= ? and created_at <= ?",Time.now()-4*7*24*60*60,Time.now()]%>
+
+<table>
+
+<% for recipe in @recipes_list %>
+  <tr>
+    <td><%= link_to "#{recipe.title}", recipe %>
+	</td>
+    <td>
+    	(<%= recipe.category.name %>)
+    </td>
+    <td>
+    	<%= h recipe.created_at.strftime("%b %d, %Y") %>
+		
+    </td>
+  </tr>
+  </table>
+<% end %>
+<!--<h2> Featured </h2>-->
+<h2> List by Category and Date Posted </h2>
+  <% form_tag '/recipes/list' do -%>
+  	<div>	
+    Added between <%= calendar_date_select_tag "from", "Jan 1, 2001" %>
+	and <%= calendar_date_select_tag "to", Time.now().strftime("%b %d, %Y") %>	
+	<%= submit_tag 'Search' %>  
+	</div>
+	<br>Categories:
+    <div width = 70px>
+    
+    
+  <%@list_categories = Category.find_by_sql ["select * from categories"]%>
+  <input type="checkbox" name = "all" checked>All Categories</input>
+  <% for category in @list_categories do%>
+  <br><input type="checkbox"  name = "rcat[<%=category["id"]%>]" value="<%=category["id"]%>" ><%=category["name"]%></input>
+<% end %>
+    
+		</div>
+	
+  <% end -%>
+
+
+<br />
+

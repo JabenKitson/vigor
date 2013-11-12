@@ -1,0 +1,31 @@
+<%= render :partial => '/layouts/header'  %>
+
+<div class="row-fluid">
+
+	<span class="span9"> 
+    <%=yield%>
+    </span>
+
+<span class="span3">
+
+<%@posts = Post.order("created_at DESC")%>
+
+<% if can? :create, Post %>
+<p><%= link_to 'Write Blog Post', new_post_path, :class => "btn btn-primary"%></p>
+<% end %>
+
+
+
+<% for post in @posts %>
+
+    <p><%= h post.created_at.strftime("%b %d, %Y") %>
+    	<%= link_to "#{post.title}", post %>
+	</p>
+<% end %>
+
+</span>
+
+</div>
+
+
+<%= render :partial => '/layouts/footer'  %>

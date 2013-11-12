@@ -1,0 +1,25 @@
+<div id="content">
+
+<%#@events_list = Event.find_by_sql ["SELECT * FROM events WHERE edate >= ? and edate <= ? and ecat = ? ",params[:from],params[:to],params[:ecat]]%>
+
+<% if params[:ecat] != "0" then ecat = "ecat = #{params[:ecat]} and " else ecat = "" end%>
+<%@events_list = Event.find_by_sql ["SELECT * FROM events WHERE #{ecat}edate >= ? and edate <= ?",Time.parse(params[:from]),Time.parse(params[:to])]%>
+
+<table>
+<% for @event in @events_list %>
+  <tr>
+    <td><%=h @event.ecat %></td>
+    <td><%=h @event.etitle %></td>
+    <td><%=h @event.edate.strftime("%b %d, %Y") %></td>
+    <td><%= link_to 'Show', @event %></td>
+	<% if can? :create, Event %>
+    <td><%= link_to 'Edit', edit_event_path(@event) %></td>
+	<% end %>
+	<% if admin? %>
+    <td><%= link_to 'Destroy', @event, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>	
+</div>
+

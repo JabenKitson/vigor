@@ -1,0 +1,39 @@
+<%= render :partial => '/layouts/header'  %>
+
+<div class="row-fluid">
+	<span class="span2" style="padding-left:2%;margin-right:2em">	
+<%= render :partial => "/events/minical", :locals => {:calendardate => @calendardate} %>
+<p>		
+
+</p>
+	</span>
+	
+	<span class="span6"> 
+    <%=yield%>
+    </span>
+
+<span class="span3">
+
+<h3>Reviewed Events</h3>
+<table>
+<% @event_list = Event.latest_reviews(5)%>
+
+<% @event_list.each do |event|%>
+<% unless event.reviews.first == nil || event.reviews.first.attachments.empty? %>
+ <tr><td><p><%= h event.edate.strftime("%b %d, %Y") %></p><%= link_to image_tag(event.reviews.first.attachments.first.photo.url(:small), :style => "width: 60%"), event %><td></tr>
+   <tr>
+    <td><h4><%= link_to "#{event.etitle}", event %>
+	</h4>
+    	
+		
+    </td>
+  </tr>
+  <%end%>
+<% end %>
+</table>
+</span>
+
+</div>
+
+
+<%= render :partial => '/layouts/footer'  %>

@@ -1,0 +1,16 @@
+<div class="row-fluid" style="z-index:-1">
+<div class="btn btn-large" style="max-width:80%;width:15em;border:1px solid grey;background-color: #dee7d9;margin: 0 1em 1em 1em;font-size:.8em;padding: 0 .45em .15em .45em">
+<h4 style="margin-left:0;margin-bottom:.45em" ><%=link_to 'Upcoming Events', events_path, :class => "btn btn-warning"%></h4>
+<% @next = Event.upcoming(5,Time.now - 1.day)%>
+<% unless @next.blank?%>
+<% @next.order("edate ASC, etimestart ASC").limit(1).each  do |event| %>
+<% unless event.blank?%>
+<span style="border-bottom:1px solid pink;padding-bottom:2px;padding-top:2px"> <%= event.edate.strftime("%b %e") %>
+<%= link_to event.etitle, event %>  </span>
+<%end%>
+<%end%>
+
+<%end%>
+</div>
+ 
+</div>

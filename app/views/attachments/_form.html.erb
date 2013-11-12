@@ -1,0 +1,11 @@
+<% object.attachments.build %>
+<%= simple_form_for(object, :html => {:multipart => true ,:class => 'form-inline'} ) do |f|%>
+   <%= f.simple_fields_for :attachments do |builder| %>
+   <% if builder.object.new_record? %>
+    <%= builder.input_field :photo, :wrapper_html => { :class => 'btn btn-success fileinput-button' } %> 
+    <%= builder.input_field :caption %> 
+  <%end%>
+  <%end%>
+    <%= f.submit "Attach Photo"%>
+  
+<% end %>

@@ -1,0 +1,56 @@
+<h1>VIGOR Contacts</h1>
+<% if can? :manage, Friend %>
+
+<%= link_to 'New Contact', new_friend_path %> &nbsp;&nbsp;&nbsp;
+<%= link_to 'Administer Contact lists', :controller => 'lists'%>
+ <%= form_tag '/friends/list' do -%>
+  	<div>	
+<p>
+	<h2>
+	 Display information for VIGOR contacts subscribed to any (one or more) checked subscription lists.
+	</h2>
+	<p>
+		<h3>Show</h3>
+		<table>
+		<tr><td>
+			<p>
+		
+     <input type="checkbox" name = "name" checked>Name.</input>
+	 <br><input type="checkbox" name = "e-mail" checked>E-mail address.</input>
+	 <br><input type="checkbox" name = "phone" checked>Phone numbers.</input>
+	 <br><input type="checkbox" name = "address" checked>Mailing address.</input>
+	 </td><td>
+	 <br><input type="checkbox" name = "uid" >vigr.org login user id.</input>
+	 <br><input type="checkbox" name = "subscribed" >Subscrbed lists.</input>
+	</p>
+	
+		</td></tr>
+		
+	<td> 
+	<br>Last Name<br><input type="text" name = "fil_lname" ></input> 
+	<br>First Name<br><input type="text" name = "fil_fname" ></input>
+	<br>Email address<br><input type="text" name = "fil_email" ></input> 
+	<br>City<br><input type="text" name = "fil_city" ></input>
+	<br>State<br><input type="text" name = "fil_state" ></input>
+	</td>
+	<td>
+	<h3>Filter By</h3>
+  <p>
+ 
+  <% for category in @list_categories do%>
+  <br><input type="checkbox"  name = "<%=category["id"]%>"><%=category["name"]%></input>
+<% end %>
+</td></tr>
+
+ </table>
+<%= submit_tag 'Display Contact List' %> 
+  </p>
+
+</p>
+   </div>
+   <%end%>
+   
+<br />
+<%= link_to 'New Contact', new_friend_path %> &nbsp;&nbsp;&nbsp;
+<%= link_to 'Administer Contact lists', :controller => 'lists'%>
+<%end%>

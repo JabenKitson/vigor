@@ -1,0 +1,87 @@
+<div id="content">
+<h1>New events</h1>
+
+<% if can? :create, Event  %>
+<%= simple_form_for(@event) do |f| %>
+  <p><b>Category</b>
+  	    <select name="event[ecat]" tabindex="2"  >
+   	                <option value = "5" >Potlucks</option>
+                       <option value = "4" >Special events</option>
+                       <option value = "1" >Education</option>
+                       <option value = "2" >Meeting</option>
+                       <option value = "3" >Outreach</option>
+                       <option value = "6" >Other</option>
+  </select> 
+  </p>
+
+<p>
+    <b>Title</b><br />
+    <%= f.text_field :etitle %>
+  </p>
+
+  <p>
+    <b>What</b><br />
+    <%= f.text_area :einfo, :size => "90x6" %>
+  </p>
+
+  <p>
+ <%= f.input :edate, label: "When" ,:as => :date, :start_year =>  Date.today.year,
+                              :end_year =>  Date.today.year + 1,
+                              :order =>  [:month, :day, :year] %> 
+  <%= f.input :etimestart, :label =>  "Start Time", :as =>  :time, :ampm =>  true, :default => Time.now.change(:hour => 18), minute_step: 15%>
+  <%= f.input :etimeend, :label => "End Time", :as =>  :time, :ampm =>  true,:default => Time.now.change(:hour => 20), minute_step: 15 %>     
+ </p>
+
+  <p>
+    <b>Location</b><br />
+    <%= f.text_field :elocation, :size=> "80" %>
+  </p>
+
+  <p>
+    <b>Contactname</b><br />
+    <%= f.text_field :econtactname, :size=> "80" %>
+  </p>
+
+  <p>
+    <b>Contact Phone</b><br />
+    <%= f.text_field :econtactphone %>
+  </p>
+
+  <p>
+    <b>Contact Email</b><br />
+    <%= f.text_field :econtactemail, :size=> "80" %>
+  </p>
+
+  <p>
+    <b>Directions</b><br />
+    <%= f.text_area :edirections, :size => "90x6" %>
+  </p>
+
+  <p>
+    <b>Map URL</b><br />
+    <%= f.text_field :emaps, :size=> "120" %>
+  </p>
+
+  <p>
+    <b>Cost</b><br />
+    <%= f.text_field :ecost %>
+  </p>
+
+  <p>
+    <b>More Information URL</b><br />
+    <%= f.text_field :elinkmoreinfo, :size=> "120" %>
+  </p>
+
+
+  <p>
+    <b>Make Active</b><br />
+    <%= f.check_box :active, :checked =>"checked" %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+<% end %>
+<%= link_to 'Back', events_path %>
+</div>

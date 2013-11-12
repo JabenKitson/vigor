@@ -1,4 +1,39 @@
-<h3>Home</h3>
-<% @users.each do |user| %>
-  <p>User: <%=link_to user.name, user %></p>
-<% end %>
+
+
+
+<div style="background-color:#e1e2e3;border-bottom: 1px solid #d7cabd;z-index:2">
+<div class="row-fluid">
+<div class="span4 text-center"><%= link_to image_tag('/assets/grocers.png'), grocery_path%>
+<p>Grocery Stores in Rochester with vegetarian item highlights and prices.</p>
+</div>
+<div class="span4 text-center"><%= link_to image_tag('/assets/restaurant.png'), ristorantes_path %>
+<p>Restaurants with reviews written by herbivores!</p>
+
+</div>
+<div class="span4 text-center"><%= link_to image_tag('/assets/csas.png'), csas_path %>
+	<p>Listing of Community Supported Agriculture (CSA) programs delivering to Rochester.</p>
+</div>
+</div>
+</div>
+ <div class="row-fluid center" style="width:100%;">
+ 	
+ 	<div class="span6 container-fluid center" style="padding:1em">
+ 		
+ 		
+<!-- ABOUT -->
+ <h2 style="color:#5e4c5a">Who are we?</h2>
+ 
+ <p>The Vegetarian Information Group of Rochester (VIGOR) was founded in 2001 in Rochester Minnesota by a group of vegetarian and vegan enthusiasts.  </p>
+ <p>VIGOR remains a thriving community dedicated to promoting healthy, earth-friendly, and compassionate living through plant-based food choices.</p>
+ 
+ </div>
+<div class="span6 container-fluid center" style="padding:1em">
+<h2 style="color:#5e4c5a">What do we do?</h2>
+<p>First and foremost we eat plants and gather once a month to share a vegan potluck meal at the Rochester Public Library (Quary Hill in the summer).</p>
+<p>VIGOR has sponsored several food events, lectures and book signings including a food stand at Rochesterfest for 6 years and a 3,000 oat pecan veggie-burger give-away at Thursdays on First. </p>
+<p>VIGOR has distributed thousands of PETA and PCRM vegetarian starter kits and continues to do so in addition to online Vegan outreach.</p>
+</div>
+
+
+</div>
+

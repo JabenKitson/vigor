@@ -1,0 +1,2 @@
+	<%@featured = Recipe.featured%>
+	<%=render :partial => '/recipes/show', :locals => {:recipe => @featured} if @featured%>

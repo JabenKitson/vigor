@@ -22,17 +22,18 @@ Vigor::Application.configure do
   config.action_mailer.default :charset => "utf-8"
 
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: "example.com",
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: ENV["GMAIL_USERNAME"],
-    password: ENV["GMAIL_PASSWORD"]
+    :address => "smtp.gmail.com",
+    :port => 587,
+    :domain => "example.com",
+    :authentication => "plain",
+    :enable_starttls_auto => true,
+    :user_name => ENV["GMAIL_USERNAME"],
+    :password => ENV["GMAIL_PASSWORD"]
   }
 
 
-
+  config.serve_static_assets = false  
+  
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
@@ -46,9 +47,6 @@ Vigor::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  # Do not compress assets
-  config.assets.compress = false
 
-  # Expands the lines which load the assets
-  config.assets.debug = true
+
 end

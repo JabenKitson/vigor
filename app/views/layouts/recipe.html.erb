@@ -1,0 +1,38 @@
+<%= render :partial => '/layouts/header'  %>
+
+<div class="row-fluid">
+	<span class="span2" style="background-color:#EDE8DE">
+		<%= render :partial => '/recipes/navbar'%>
+	</span>
+	<span class="span7"> 
+    <%=yield%>
+    </span>
+
+<span class="span3">
+
+<%@recipes_list = Recipe.newest(5)%>
+
+<% if can? :create, Recipe %>
+<p><%= link_to 'Add recipe', new_recipe_path, :class => "btn btn-primary"%></p>
+<% end %>
+
+<table>
+
+<% for recipe in @recipes_list %>
+<%unless recipe.attachments.empty?%>
+ <tr><td><%= link_to image_tag(recipe.attachments.first.photo, :style => "width: 60%"), recipe %></td></tr>
+   <tr>
+    <td><%= link_to "#{recipe.name}", recipe %>
+    	<%= h recipe.created_at.strftime("%b %d, %Y") %>
+		
+    </td>
+  </tr>
+  <%end%>
+<% end %>
+</table>
+</span>
+
+</div>
+
+
+<%= render :partial => '/layouts/footer'  %>

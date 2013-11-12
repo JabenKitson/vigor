@@ -1,0 +1,32 @@
+<h1>Editing <%=@list_cat.name%> list</h1>
+
+<p> Note: This page allows you to change the name of this list, description and contacts on this list.  The list of contacts you see below is all of the VIGOR contacts.  Only the ones with check marks are on this list.  To add or remove, either check or uncheck the box.  If you'd like to view additional information or print lists of contact info go to the <%= link_to 'Contact Database', friends_path %> page.
+<% form_for(@list_cat) do |f| %>
+  <p>
+    <b>Name</b><br />
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <b>Description</b><br />
+    <%= f.text_area :description, :size => "80X2"%>
+  </p>
+  
+  <p><b>Add or remove contacts from this list:</b>
+  <% allcontacts = Friend.find(:all,:order =>'lname')
+  for acontact in allcontacts do%>
+   <br><input type="checkbox"  name = "<%=acontact["id"]%>" 
+   <%if List.find(:all,:conditions => "friend_id = #{acontact["id"]} and list_cat_id = #{@list_cat.id}" ).size >=1%>
+   checked
+   <%end%>
+   ><%=acontact["fname"]%>&nbsp;<%=acontact["lname"]%></input>
+ <% end %>
+</p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Contact Database', friends_path %> &nbsp; &nbsp; &nbsp; &nbsp;
+<%= link_to 'Administer Contact lists', :controller => 'lists'%>

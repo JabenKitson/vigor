@@ -1,0 +1,68 @@
+<p>
+  <b>Fname:</b>
+  <%=h @friend.fname %>
+</p>
+
+<p>
+  <b>Lname:</b>
+  <%=h @friend.lname %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @friend.email %>
+</p>
+
+<p>
+  <b>Hphone:</b>
+  <%=h @friend.hphone %>
+</p>
+
+<p>
+  <b>Wphone:</b>
+  <%=h @friend.wphone %>
+</p>
+
+<p>
+  <b>Cphone:</b>
+  <%=h @friend.cphone %>
+</p>
+
+<p>
+  <b>Fax:</b>
+  <%=h @friend.fax %>
+</p>
+
+<p>
+  <b>Street:</b>
+  <%=h @friend.street %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%=h @friend.city %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%=h @friend.state %>
+</p>
+
+<p>
+  <b>Country:</b>
+  <%=h @friend.country %>
+</p>
+
+<p>
+  <b>Zip:</b>
+  <%=h @friend.zip %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @friend.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_friend_path(@friend) %> |
+<%= link_to 'Back', friends_path %>

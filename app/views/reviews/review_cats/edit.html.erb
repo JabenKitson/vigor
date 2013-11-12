@@ -1,0 +1,22 @@
+<h1>Editing review_cat</h1>
+
+<%= error_messages_for :review_cat %>
+
+<% form_for(@review_cat) do |f| %>
+  <p>
+    <b>Name</b><br />
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <b>Description</b><br />
+    <%= f.text_area :description %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @review_cat %> |
+<%= link_to 'Back', review_cats_path %>

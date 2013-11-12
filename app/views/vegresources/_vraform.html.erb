@@ -1,0 +1,24 @@
+ <script type="text/javascript">                                         
+   $(document).ready(function() {
+      $("a#colapse").click(function() {
+     $("#veg-resource-<%= vegresource.id %>").toggle();
+   });
+
+ });                                 
+ </script> 
+ <a id="colapse" class="btn btn-warning" href="#">Change Attributes</a>
+<div id="veg-resource-<%= vegresource.id %>" class="modal" style="display:none;postion:absolute" >
+  <%= simple_form_for vegresource, :url => vegresource_path(vegresource), :html => {:method => :put, :class => 'form-horizontal' } do |f| %>
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">&#215;</a>
+      <h3>Update Attributes</h3>
+    </div>
+    <div class="modal-body">
+      <%= f.input :vrattribute_ids, :collection => Vrattribute.where(:vrtype => vegresource.vrtype), :as => :check_boxes, :label_method => lambda {|t| t.name}, :label => false, :item_wrapper_class => 'inline', :checked =>  lambda {|t| !t.vegresources.find_by_id(vegresource.id).nil?} %>
+    </div>
+    <div class="modal-footer">
+      <%= f.submit "Update Attributes", :class => "btn" %>
+      <a class="btn" data-dismiss="modal" href="#">Close</a>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,12 @@
+<% 
+if attachment.photo.size #&& attachment.photo.width > attachment.photo.height && attachment.photo.width > 1600 && attachment.photo.height > 900 
+%>
+<%= simple_form_for(attachment,:html =>{:class => 'form-inline'}) do |f| %>
+
+  Allow display as front page background? 
+  <%= radio_button_tag 'attachment[eligibility]', 1, attachment.eligibility != nil && attachment.eligibility == 1 %> Yes
+  <%= radio_button_tag 'attachment[eligibility]', 0, attachment.eligibility == nil || attachment.eligibility == 0 %> No
+  <%= f.button :submit, 'Change'%>
+
+<% end %>
+<% end %>

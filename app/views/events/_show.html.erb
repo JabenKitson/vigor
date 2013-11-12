@@ -1,0 +1,83 @@
+<div class="row-fluid">
+<%@event = event%>	
+<% unless event.blank? %>
+<div class="hero-unit">
+  <h1><%=h @event.etitle %></h1>
+  <p> <%=h @event.einfo %></p>
+  <p>
+    	<%unless @event.attachments.empty?%>
+   <img src="<%= @event.attachments.first.photo.url(:medium) %>">
+    <%end%>
+  </p>
+</div>
+<h2 class="title"></h2>
+
+
+<%=@event.edate.strftime("%A, %b %d, %Y")%>
+<%=render :partial => '/layouts/like', :locals => {:likeurl => event_url(@event)}%>	
+
+<%event_text = "<div>"%>
+<%event_text += "<span ><p> #{ @event.etimestart.strftime("%I:%M%p")} #{@event.etimeend.strftime("- %I:%M%p")}"%>
+<%event_text += "<p> #{@event.elocation}"%>
+<%event_text += "<p> #{@event.einfo}"%>
+<%unless @event.ecost.blank?%>
+<%event_text += "<p><b>Cost:</b> #{@event.ecost}"%>
+<%end%>
+<%unless @event.econtactname.blank?%>
+<%event_text += "<p><b>Contact:</b> #{@event.econtactname} - #{@event.econtactphone} - <a href=\"mailto:#{@event.econtactemail}\">#{@event.econtactemail}</a>"%>
+<%end%>
+<%unless @event.emaps.blank?%>
+<%event_text += "<p><b>Directions:</b> #{@event.edirections}"%>
+<%event_text += "<a href=\"#{@event.emaps}\">Map</a>"%>
+  <%end%>
+<%event_text += "<p> <a href=\"#{@event.elinkmoreinfo}\">#{@event.elinkmoreinfo}</a></div>"%>
+
+<%=event_text.html_safe%>
+
+<%= render :partial => '/attachments/view', :locals => {:object => @event} %>
+
+	<% if can? :manage, Friend%><div>
+	
+   <!-- Email this event to list -->
+    <% form_tag '/home/send_email2list' do -%>
+	<%= hidden_field_tag 'doc_url', "http://www.vigr.org/events/#{@event.id}"%>
+	<%= hidden_field_tag 'subject', @event.etitle%>
+	<%= hidden_field_tag 'message', event_text%>
+	Send this post to the following list:
+   <%= select("list", "list_cat_id", ListCat.find(:all).collect{ |c| [ c.name, c.id] }) %>
+   <%= submit_tag "Send", :confirm => 'Are you sure you want to email this to the selected list?' %>
+   <%end%> 
+    </div><%end%>
+    
+    	<%if @event.user%>
+    	<p><%=render :partial => '/users/profilethumb', :locals => {:user => @event.user}%></p>
+    	<p> Event submitted by <%=@event.user.name%></p>
+<%end%>
+	
+<% if can? :create, Event %>
+<%= render :partial => '/attachments/form', :locals => {:object => @event} %>
+<%= link_to 'Copy', :controller => 'events', :action => 'copy', :id => @event.id %> |
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<% end %>
+<%= link_to 'Back', events_path %>
+<% if can? :delete, Event %>
+| <%= link_to 'Delete', @event, :confirm => 'Are you sure?', :method => :delete %>
+<% end %>
+
+
+<!-- REVIEWS -->
+<h3>Reviews</h3>
+<p>
+<%if can? :create, Event%>
+<p><%= link_to 'Write Review', review_event_path(@event), :class => "btn btn-primary"  %></p>
+<% elsif !user_signed_in? %>
+<%= render :partial => '/users/signup', :locals => {:message => "to get access to review events!"}%>
+<%end%>
+</p>
+<% @event.reviews.each do |review| %>
+<div class="container-fluid btn btn-large" style="margin-left:0">
+<%= render :partial => '/reviews/show', :locals => {:review => review} %>
+</div>
+<% end %>
+<%end%>
+</div>

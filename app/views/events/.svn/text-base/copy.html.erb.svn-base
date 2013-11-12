@@ -1,0 +1,124 @@
+<div id="content">
+<h1>New events</h1>
+
+<%= error_messages_for :events %>
+
+<% if can? :create, Event %>
+<% form_for(@event) do |f| %>
+
+  <p><b>Category</b>
+  	<select name="event[ecat]" tabindex="2"  >
+    	                <option value = "5" <%if @copy[:ecat] == 5 then %>selected="true"<%end%>>Potlucks</option>
+                        <option value = "4" <%if @copy[:ecat] == 4 then %>selected="true"<%end%>>Special events</option>
+                        <option value = "1" <%if @copy[:ecat] == 1 then %>selected="true"<%end%>>Education</option>
+                        <option value = "2" <%if @copy[:ecat] == 2 then %>selected="true"<%end%>>Meeting</option>
+                        <option value = "3" <%if @copy[:ecat] == 3 then %>selected="true"<%end%>>Outreach</option>
+                        <option value = "6" <%if @copy[:ecat] == 6 then %>selected="true"<%end%>>Other</option>
+	</select> 
+  </p>
+
+<p>
+    <b>Title</b><br />
+    <%= f.text_field :etitle, :value => @copy[:etitle] %>
+  </p>
+
+  <p>
+    <b>What</b><br />
+    <%= f.text_area :einfo, :size => "90x6", :value => @copy[:einfo] %>
+  </p>
+
+  <p>
+    <b>When</b><br />
+	<%= calendar_date_select_tag "event[edate]", (@copy[:edate]).strftime("%b %d, %Y")%>
+
+    <b>From </b>
+  
+<input type="hidden" id="event_etimestart_1i" name="event[etimestart(1i)]" value="2000"></input>
+<input type="hidden" id="event_etimestart_2i" name="event[etimestart(2i)]" value="1"></input>
+<input type="hidden" id="event_etimestart_3i" name="event[etimestart(3i)]" value="1"></input>
+<select id="event_etimestart_4i" name="event[etimestart(4i)]">
+
+ <%(0..23).each do |i|%>
+
+ <option value="<%=i%>" <%if @copy[:etimestart].hour == i %> selected="selected" <%end%> > <%=i%> </option>
+ <%end%>
+</select>
+ : <select id="event_etimestart_5i" name="event[etimestart(5i)]">
+
+ <%(0..59).each do |i|%>
+ <option value="<%=i%>"<%if @copy[:etimestart].min == i %> selected="selected" <%end%>><%=i%></option>
+ <%end%>
+</select>
+
+     &nbsp 
+    <b>To </b>
+<input type="hidden" id="event_etimeend_1i" name="event[etimeend(1i)]" value="2000"></input>
+<input type="hidden" id="event_etimeend_2i" name="event[etimeend(2i)]" value="1"></input>
+<input type="hidden" id="event_etimeend_3i" name="event[etimeend(3i)]" value="1"></input>
+<select id="event_etimeend_4i" name="event[etimeend(4i)]">
+
+ <%(0..23).each do |i|%>
+ <option value="<%=i%>" <%if @copy[:etimeend].hour == i %> selected="selected" <%end%> ><%=i%></option>
+ <%end%>
+</select>
+ : <select id="event_etimeend_5i" name="event[etimeend(5i)]">
+
+ <%(0..59).each do |i|%>
+ <option value="<%=i%>" <%if @copy[:etimeend].min == i %> selected="selected" <%end%> ><%=i%></option>
+ <%end%>
+</select>
+ </p>
+
+  <p>
+    <b>Location</b><br />
+    <%= f.text_field :elocation, :size=> "80", :value => @copy[:elocation]%>
+  </p>
+
+  <p>
+    <b>Contactname</b><br />
+    <%= f.text_field :econtactname, :size=> "80", :value => @copy[:econtactname] %>
+  </p>
+
+  <p>
+    <b>Contact Phone</b><br />
+    <%= f.text_field :econtactphone, :value => @copy[:econtactphone] %>
+  </p>
+
+  <p>
+    <b>Contact Email</b><br />
+    <%= f.text_field :econtactemail, :size=> "80", :value => @copy[:econtactemail] %>
+  </p>
+
+  <p>
+    <b>Directions</b><br />
+    <%= f.text_area :edirections, :size => "90x6", :value => @copy[:edirections] %>
+  </p>
+
+  <p>
+    <b>Map URL</b><br />
+    <%= f.text_field :emaps, :size=> "120", :value => @copy[:emaps] %>
+  </p>
+
+  <p>
+    <b>Cost</b><br />
+    <%= f.text_field :ecost, :value => @copy[:ecost] %>
+  </p>
+
+  <p>
+    <b>More Information URL</b><br />
+    <%= f.text_field :elinkmoreinfo, :size=> "120", :value => @copy[:elinkmoreinfo] %>
+  </p>
+
+
+  <p>
+    <b>Make Active</b><br />
+    <%= f.check_box :active, :checked =>"checked" %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+<% end %>
+<%= link_to 'Back', events_path %>
+</div>

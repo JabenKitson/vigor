@@ -1,0 +1,17 @@
+   <html>
+   <body>
+   <h3>Vigor Board</h3>
+    
+   <p>
+   <%= @mail_info["from_name"] %> has filled out the VIGOR contact form with topic: <%=@mail_info["the_subject"] %>
+   </p>
+    
+   <br/>
+   Message:
+   <br/>
+   <p>
+   <%= @mail_info["message"] %>
+   <p>
+   You may reply to <a href="mailto:<%= @mail_info["from_email"] %>"><%= @mail_info["from_email"] %></a>"<br/>
+   </body>
+   </html>

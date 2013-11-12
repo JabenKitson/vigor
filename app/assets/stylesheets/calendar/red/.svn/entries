@@ -1,0 +1,40 @@
+8
+
+dir
+8
+svn+ssh://jabenkit@jabenkitson.com/home/jabenkit/svn/vigr/public/stylesheets/calendar/red
+svn+ssh://jabenkit@jabenkitson.com/home/jabenkit/svn/vigr
+
+
+
+2008-12-23T15:01:46.531753Z
+1
+jabenkit
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a22d958e-fe99-47c6-acec-b73cca48d107
+
+style.css
+file
+
+
+
+
+2009-01-29T02:27:07.000000Z
+fcefc851de77136db5dbaa5747c9b7cf
+2008-12-23T15:01:46.531753Z
+1
+jabenkit
+

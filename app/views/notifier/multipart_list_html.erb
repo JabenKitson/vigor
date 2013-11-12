@@ -1,0 +1,15 @@
+   <html>
+   <body>
+   Dear <%= @mail_info["name"] %>,
+   <br>
+   This is a note from the Vegetarian Information Group of Rochester: 
+   <p>
+   ******************************************************************************
+   <%= @mail_info["message"] %>
+   ******************************************************************************
+   </p>  
+   <p>This information was posted at <a href=" <%= @mail_info["doc_url"] %> "><%= @mail_info["doc_url"] %></a> </p>
+   <p>Your address is on our e-mail list. To unsubscribe to this list please submit your request with your name and e-mail address to the contact form at <a href ="http://www.vigr.org/contact">http://www.vigr.org/contact</a>.
+   <br>Thankyou.</p>
+   </body>
+   </html>

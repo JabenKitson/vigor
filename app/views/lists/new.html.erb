@@ -1,0 +1,20 @@
+<h1>New list</h1>
+
+<%= form_for(@list) do |f| %>
+  <p>
+    <b>Friend</b> - If parms doesn't provide contact name, list contacts in checkboxes.<br />
+    <%= f.text_field :friend_id , :value => params["friend_id"]%>
+  </p>
+
+  <p>
+    <b>List cat</b> - If parms doesn't provide list name, list categories in check boxes.<br />
+    <%= f.text_field :list_cat_id, :value => params["list_cat"]["category_id"] %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Contacts Query Page', friends_path %> &nbsp; &nbsp; &nbsp; &nbsp;
+<%= link_to 'Administer Contact lists', :controller => 'lists'%>

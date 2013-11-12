@@ -1,0 +1,27 @@
+<div id="content">
+<%= render :partial => "post", :object => @post %>
+<%= render :partial => '/attachments/view', :locals => {:object => @post} %>
+
+<%if can? :create, Post %>
+<%= render :partial => '/attachments/form', :locals => {:object => @post} %>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<% end %>
+<%= link_to 'Back', posts_path %>
+    <% if can? :manage, List %><div>
+   <!-- Email this post to list -->
+    <%= form_tag '/home/send_email2list' do -%>
+	<%= hidden_field_tag 'doc_url', "http://www.vigr.org/posts/#{@post.id}"%>
+	<%= hidden_field_tag 'subject', @post.title%>
+	<% blog_post = "<H1>#{@post.title}</H1><div>#{@post.body}</div>"%>
+	<%= hidden_field_tag 'message', blog_post%>
+	Send this post to the following list:
+   <%= select("list", "list_cat_id", ListCat.find(:all).collect{ |c| [ c.name, c.id] }) %>
+   <%= submit_tag "Send", :confirm => 'Are you sure you want to email this to the selected list?' %>
+   <%end%> 
+    </div><%end%>
+
+</p>
+
+
+</div>

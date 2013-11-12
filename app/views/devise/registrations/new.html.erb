@@ -1,11 +1,18 @@
 <h2>Sign up</h2>
+<p>Registration is for local members and guests of the Vegetarian Informaiton Group of Rochester who wish to 
+	share recipes, events and information including restaurant and grocery highlights and reviews. Everything is entirely free of charge.</p>
+<p>Step 1. Sign up.  When you signup VIGOR board members will be notified of your request for authorization.</p>
+<p>Step 2. One of the Board members will contact you and grant you authorization.
+<p>Step 3. Once you are authorized, options for posting content will become visible to you on the site.
+<p>You're e-mail address will remain private and will not be given to anyone or exposed in any way.  It will only be used for authentication to this website and for sending notifications about your account while it is active.  You may cancel at any time.'</p>
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
   <%= f.error_notification %>
-  <%= display_base_errors resource %>
+  
   <%= f.input :name, :autofocus => true %>
   <%= f.input :email, :required => true %>
   <%= f.input :password, :required => true %>
   <%= f.input :password_confirmation, :required => true %>
+  <%= recaptcha_tags %> 
   <%= f.button :submit, 'Sign up', :class => 'btn-primary' %>
 <% end %>
 <%= render "devise/shared/links" %>

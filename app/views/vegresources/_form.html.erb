@@ -1,0 +1,17 @@
+<%= simple_form_for(@vegresource) do |f| %>
+  <%= f.error_notification %>
+  
+  <div class="form-inputs">
+    <%= f.hidden_field :vrtype, :value => @vrtype%>
+    <% capvrtype = @vrtype; capvrtype[0] = capvrtype[0].to_s.capitalize %>
+    <%= f.input :name, :label => capvrtype + ' name'%>
+    <%= f.input :website %>
+    <%= f.input :author if @vrtype == 'book'%>
+    <%= f.input :address if ['restaurant','store'].include?(@vrtype)%>
+    <%= f.input :info, :label => 'Information' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Submit', :class => "btn btn-primary"%>
+  </div>
+<% end %>
